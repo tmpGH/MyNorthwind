@@ -10,13 +10,7 @@ using System.Threading.Tasks;
 namespace Application.Categories.Queries
 {
     public class GetCategoriesQuery : PageableQuery, IRequest<List<CategoryItemDto>>
-    {
-        public GetCategoriesQuery()
-        {
-            PageNumber = 1;
-            ItemsOnPage = 10;
-        }
-    }
+    { }
 
     public class GetCategoriesQueryHandler : IRequestHandler<GetCategoriesQuery, List<CategoryItemDto>>
     {
@@ -38,6 +32,7 @@ namespace Application.Categories.Queries
                     Description = e.Description
                 })
                 .ToListAsync();
+
             return result;
         }
     }

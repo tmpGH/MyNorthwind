@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.CustomerDemographics.Queries;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,9 +11,14 @@ namespace WebApi.Controllers
     {
         // GET: api/<CustomerDemographicsController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult<List<CustomerDemographicItemDto>>> GetAsync(int? pageNumber)
         {
-            return new string[] { "value1", "value2" };
+            var request = new GetCustomerDemographicsQuery
+            {
+                PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,
+                ItemsOnPage = this.ItemsOnPage
+            };
+            return await Mediator.Send(request);
         }
 
         // GET api/<CustomerDemographicsController>/5

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Customers.Queries;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,16 +12,29 @@ namespace WebApi.Controllers
     {
         // GET: api/<CustomersController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<List<CustomerItemDto>> GetAsync(int? pageNumber)
         {
-            return new string[] { "value1", "value2" };
+            var request = new GetCustomersQuery
+            {
+                PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,
+                ItemsOnPage = this.ItemsOnPage
+            };
+            return await Mediator.Send(request);
         }
 
-        // GET api/<CustomersController>/5
+        // GET api/<CustomersController>/abc
         [HttpGet("{id}")]
-        public string Get(int id)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<CustomerDto>> Get(string id)
         {
-            return "value";
+            var request = new GetCustomerQuery { Id = id };
+            var result = await Mediator.Send(request);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return result;
         }
 
         // POST api/<CustomersController>

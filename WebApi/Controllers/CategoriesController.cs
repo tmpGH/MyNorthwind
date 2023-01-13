@@ -26,7 +26,7 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult<CategoryDto>> GetAsync(int id)
+        public async Task<ActionResult<CategoryDto>> Get(int id)
         {
             var request = new GetCategoryQuery { Id = id };
             var result = await Mediator.Send(request);
