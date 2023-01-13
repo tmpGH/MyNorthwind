@@ -7,7 +7,8 @@ namespace Domain.Entities
     {
 		public Employee()
         {
-			Reports = new List<Employee>();
+			Employees = new List<Employee>();
+			Orders = new List<Order>();
 			EmployeeTerritories = new List<EmployeeTerritory>();
 		}
 
@@ -32,11 +33,12 @@ namespace Domain.Entities
 		public string Notes { get; set; }           //[ntext] NULL,
 		public string PhotoPath { get; set; }       //[nvarchar] (255) NULL,
 
-		// TODO: self reference
+		public ICollection<Order> Orders { get; set; }
+		public ICollection<EmployeeTerritory> EmployeeTerritories { get; set; }
+
+		// self reference
 		public int? ReportsTo { get; set; }         //[int] NULL,
 		public Employee Manager { get; set; }
-		public ICollection<Employee> Reports { get; set; }
-
-		public ICollection<EmployeeTerritory> EmployeeTerritories { get; set; }
+		public ICollection<Employee> Employees { get; set; }
 	}
 }

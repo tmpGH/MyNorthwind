@@ -1,7 +1,4 @@
-- add all entities
 - correct field types in entities
-- nullable properties (int) in entities
-- add mappings
 
 --------------------
 

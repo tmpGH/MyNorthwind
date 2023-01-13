@@ -8,6 +8,9 @@ namespace Infrastructure.Persistance.Configurations
     {
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
+            builder.Property(e => e.CustomerID)
+                .HasMaxLength(5)
+                .IsFixedLength();
             builder.Property(e => e.CompanyName)
                 .HasMaxLength(40)
                 .IsRequired();
