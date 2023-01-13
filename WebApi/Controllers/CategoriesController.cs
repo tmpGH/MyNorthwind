@@ -10,8 +10,6 @@ namespace WebApi.Controllers
     [ApiController]
     public class CategoriesController : ApiBaseController
     {
-        private readonly int _itemsOnPage = 3;
-
         // GET: api/<CategoriesController>
         [HttpGet]
         public async Task<ActionResult<List<CategoryItemDto>>> Get(int? pageNumber)
@@ -19,7 +17,7 @@ namespace WebApi.Controllers
             var request = new GetCategoriesQuery
             {
                 PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,
-                ItemsOnPage = _itemsOnPage
+                ItemsOnPage = this.ItemsOnPage
             };
             return await Mediator.Send(request);
         }
