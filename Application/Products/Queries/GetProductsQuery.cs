@@ -9,27 +9,27 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Customers.Queries
+namespace Application.Products.Queries
 {
-    public class GetCustomersQuery : PageableQuery, IRequest<List<CustomerItemDto>> { }
+    public class GetProductsQuery : PageableQuery, IRequest<List<ProductItemDto>> { }
 
-    public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, List<CustomerItemDto>>
+    public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, List<ProductItemDto>>
     {
         private readonly IAppDbContext _context;
         private readonly IMapper _mapper;
 
-        public GetCustomersQueryHandler(IAppDbContext context, IMapper mapper)
+        public GetProductsQueryHandler(IAppDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public Task<List<CustomerItemDto>> Handle(GetCustomersQuery request, CancellationToken cancellationToken)
+        public Task<List<ProductItemDto>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
         {
-            var result = _context.Customers
+            var result = _context.Products
                 .Skip((request.PageNumber - 1) * request.ItemsOnPage)
                 .Take(request.ItemsOnPage)
-                .ProjectTo<CustomerItemDto>(_mapper.ConfigurationProvider)
+                .ProjectTo<ProductItemDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
             return result;

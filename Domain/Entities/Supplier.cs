@@ -20,8 +20,6 @@ namespace Domain.Entities
 		public string Country { get; set; }         //[nvarchar] (15) NULL,
 		public string Phone { get; set; }           //[nvarchar] (24) NULL,
 		public string Fax { get; set; }             //[nvarchar] (24) NULL,
-
-		// TODO: is this a proper type ?
 		public string HomePage { get; set; }        //[ntext] NULL,
 		
 		public ICollection<Product> Products { get; private set; }

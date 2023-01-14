@@ -11,8 +11,7 @@ using System.Threading.Tasks;
 
 namespace Application.CustomerDemographics.Queries
 {
-    public class GetCustomerDemographicsQuery : PageableQuery, IRequest<List<CustomerDemographicItemDto>>
-    { }
+    public class GetCustomerDemographicsQuery : PageableQuery, IRequest<List<CustomerDemographicItemDto>> { }
 
     public class GetCustomerDemographicsQueryHandler : IRequestHandler<GetCustomerDemographicsQuery, List<CustomerDemographicItemDto>>
     {

@@ -11,8 +11,7 @@ using System.Threading.Tasks;
 
 namespace Application.Categories.Queries
 {
-    public class GetCategoriesQuery : PageableQuery, IRequest<List<CategoryItemDto>>
-    { }
+    public class GetCategoriesQuery : PageableQuery, IRequest<List<CategoryItemDto>> { }
 
     public class GetCategoriesQueryHandler : IRequestHandler<GetCategoriesQuery, List<CategoryItemDto>>
     {
