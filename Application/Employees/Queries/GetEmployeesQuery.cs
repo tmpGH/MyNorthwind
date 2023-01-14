@@ -7,29 +7,31 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Customers.Queries
+namespace Application.Employees.Queries
 {
-    public class GetCustomersQuery : PageableQuery, IRequest<List<CustomerItemDto>>
+    public class GetEmployeesQuery : PageableQuery, IRequest<List<EmployeeItemDto>>
     { }
 
-    public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, List<CustomerItemDto>>
+    public class GetEmployeesQueryHandler : IRequestHandler<GetEmployeesQuery, List<EmployeeItemDto>>
     {
         private readonly IAppDbContext _context;
 
-        public GetCustomersQueryHandler(IAppDbContext context)
+        public GetEmployeesQueryHandler(IAppDbContext context)
         {
             _context = context;
         }
 
-        public Task<List<CustomerItemDto>> Handle(GetCustomersQuery request, CancellationToken cancellationToken)
+        public Task<List<EmployeeItemDto>> Handle(GetEmployeesQuery request, CancellationToken cancellationToken)
         {
-            var result = _context.Customers
+            var result = _context.Employees
                 .Skip((request.PageNumber - 1) * request.ItemsOnPage)
                 .Take(request.ItemsOnPage)
-                .Select(e => new CustomerItemDto
+                .Select(e => new EmployeeItemDto
                 {
-                    CustomerID = e.CustomerID,
-                    CompanyName = e.CompanyName,
+                    EmployeeID = e.EmployeeID,
+                    LastName = e.LastName,
+                    FirstName = e.FirstName,
+                    Title = e.Title,
                     Address = e.Address,
                     City = e.City,
                     Region = e.Region,
@@ -42,10 +44,12 @@ namespace Application.Customers.Queries
         }
     }
 
-    public class CustomerItemDto
+    public class EmployeeItemDto
     {
-        public string CustomerID { get; set; }
-        public string CompanyName { get; set; }
+        public int EmployeeID { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public string Title { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string Region { get; set; }
