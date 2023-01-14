@@ -1,5 +1,7 @@
 ﻿using Application.Common;
 using Application.Common.Interfaces;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -15,10 +17,12 @@ namespace Application.Employees.Queries
     public class GetEmployeesQueryHandler : IRequestHandler<GetEmployeesQuery, List<EmployeeItemDto>>
     {
         private readonly IAppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public GetEmployeesQueryHandler(IAppDbContext context)
+        public GetEmployeesQueryHandler(IAppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public Task<List<EmployeeItemDto>> Handle(GetEmployeesQuery request, CancellationToken cancellationToken)
@@ -26,34 +30,12 @@ namespace Application.Employees.Queries
             var result = _context.Employees
                 .Skip((request.PageNumber - 1) * request.ItemsOnPage)
                 .Take(request.ItemsOnPage)
-                .Select(e => new EmployeeItemDto
-                {
-                    EmployeeID = e.EmployeeID,
-                    LastName = e.LastName,
-                    FirstName = e.FirstName,
-                    Title = e.Title,
-                    Address = e.Address,
-                    City = e.City,
-                    Region = e.Region,
-                    PostalCode = e.PostalCode,
-                    Country = e.Country
-                })
+                .ProjectTo<EmployeeItemDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
             return result;
         }
     }
 
-    public class EmployeeItemDto
-    {
-        public int EmployeeID { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-        public string Title { get; set; }
-        public string Address { get; set; }
-        public string City { get; set; }
-        public string Region { get; set; }
-        public string PostalCode { get; set; }
-        public string Country { get; set; }
-    }
+
 }

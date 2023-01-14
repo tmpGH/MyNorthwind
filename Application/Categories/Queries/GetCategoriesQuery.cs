@@ -1,5 +1,7 @@
 ﻿using Application.Common;
 using Application.Common.Interfaces;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -15,32 +17,23 @@ namespace Application.Categories.Queries
     public class GetCategoriesQueryHandler : IRequestHandler<GetCategoriesQuery, List<CategoryItemDto>>
     {
         private readonly IAppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public GetCategoriesQueryHandler(IAppDbContext context)
+        public GetCategoriesQueryHandler(IAppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public Task<List<CategoryItemDto>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
         {
             var result = _context.Categories
-                .Skip( (request.PageNumber - 1) * request.ItemsOnPage )
+                .Skip((request.PageNumber - 1) * request.ItemsOnPage)
                 .Take(request.ItemsOnPage)
-                .Select(e => new CategoryItemDto {
-                    CategoryID = e.CategoryID,
-                    CategoryName = e.CategoryName,
-                    Description = e.Description
-                })
+                .ProjectTo<CategoryItemDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
             return result;
         }
-    }
-
-    public class CategoryItemDto
-    {
-        public int CategoryID { get; set; }
-        public string CategoryName { get; set; }
-        public string Description { get; set; }
     }
 }

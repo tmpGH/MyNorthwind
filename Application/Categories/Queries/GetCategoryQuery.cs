@@ -1,4 +1,5 @@
 ﻿using Application.Common.Interfaces;
+using AutoMapper;
 using MediatR;
 
 namespace Application.Categories.Queries
@@ -12,28 +13,19 @@ namespace Application.Categories.Queries
     public class GetCategoryQueryHandler : RequestHandler<GetCategoryQuery, CategoryDto>
     {
         private readonly IAppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public GetCategoryQueryHandler(IAppDbContext context)
+        public GetCategoryQueryHandler(IAppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         protected override CategoryDto Handle(GetCategoryQuery request)
         {
             var entity = _context.Categories.Find(request.Id);
-            return entity == null ? null : new CategoryDto
-                {
-                    CategoryID = entity.CategoryID,
-                    CategoryName = entity.CategoryName,
-                    Description = entity.Description
-                };
-        }
-    }
 
-    public class CategoryDto
-    {
-        public int CategoryID { get; set; }
-        public string CategoryName { get; set; }
-        public string Description { get; set; }
+            return _mapper.Map<CategoryDto>(entity);
+        }
     }
 }
