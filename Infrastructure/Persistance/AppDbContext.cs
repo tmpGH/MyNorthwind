@@ -66,7 +66,7 @@ namespace Infrastructure.Persistance
             builder.Entity<OrderDetail>()
                 .HasKey(od => new { od.OrderID, od.ProductID });
 
-            //builder.Entity<Region>().ToTable("Region");
+            builder.Entity<Region>().ToTable("Region");
 
             base.OnModelCreating(builder);
         }
