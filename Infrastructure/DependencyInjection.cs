@@ -1,4 +1,4 @@
-﻿using Application.Interfaces;
+﻿using Application.Common.Interfaces;
 using Domain.Interfaces;
 using Infrastructure.Persistance;
 using Infrastructure.Services;

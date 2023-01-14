@@ -1,5 +1,5 @@
 ﻿using Application.Common;
-using Application.Interfaces;
+using Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
