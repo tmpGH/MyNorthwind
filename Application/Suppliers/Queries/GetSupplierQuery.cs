@@ -8,7 +8,7 @@ namespace Application.Suppliers.Queries
 {
     public class GetSupplierQuery : IRequest<SupplierDto>
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
     }
 
     public class GetSupplierQueryHandler : IRequestHandler<GetSupplierQuery, SupplierDto>

@@ -8,7 +8,7 @@ namespace Application.Products.Queries
 {
     public class GetProductQuery : IRequest<ProductDto>
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
     }
 
     public class GetProductQueryHandler : IRequestHandler<GetProductQuery, ProductDto>

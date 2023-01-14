@@ -8,7 +8,7 @@ namespace Application.Regions.Queries
 {
     public class GetRegionQuery : IRequest<RegionDto>
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
     }
 
     public class GetRegionQueryHandler : IRequestHandler<GetRegionQuery, RegionDto>

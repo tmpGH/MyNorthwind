@@ -8,7 +8,7 @@ namespace Application.Shippers.Queries
 {
     public class GetShipperQuery : IRequest<ShipperDto>
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
     }
 
     public class GetShipperQueryHandler : IRequestHandler<GetShipperQuery, ShipperDto>

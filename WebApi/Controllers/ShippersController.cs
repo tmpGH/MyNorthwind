@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Shippers.Queries;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,16 +12,29 @@ namespace WebApi.Controllers
     {
         // GET: api/<ShippersController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult<List<ShipperItemDto>>> Get(int? pageNumber)
         {
-            return new string[] { "value1", "value2" };
+            var request = new GetShippersQuery
+            {
+                PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,
+                ItemsOnPage = this.ItemsOnPage
+            };
+            return await Mediator.Send(request);
         }
 
         // GET api/<ShippersController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<ShipperDto>> Get(int id)
         {
-            return "value";
+            var request = new GetShipperQuery { Id = id };
+            var result = await Mediator.Send(request);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return result;
         }
 
         // POST api/<ShippersController>
