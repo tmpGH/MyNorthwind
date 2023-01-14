@@ -7,7 +7,5 @@
 
         public string CustomerTypeID { get; set; }  //[nchar] (10) NOT NULL,
         public CustomerDemographic CustomerDemographic { get; set; }
-
-        
     }
 }

@@ -13,6 +13,6 @@ namespace Domain.Entities
         public string CompanyName { get; set; } //[nvarchar] (40) NOT NULL,
         public string Phone { get; set; }       //[nvarchar] (24) NULL,
 
-        public ICollection<Order> Orders { get; set; }
+        public ICollection<Order> Orders { get; private set; }
     }
 }

@@ -12,6 +12,6 @@ namespace Domain.Entities
         public int RegionID { get; set; }               //[int] NOT NULL, [PRIMARY]
         public string RegionDescription { get; set; }   //[nchar] (50) NOT NULL,
 
-        public IList<Territory> Territories { get; set; }
+        public ICollection<Territory> Territories { get; private set; }
     }
 }

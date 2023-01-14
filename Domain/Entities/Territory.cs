@@ -15,6 +15,6 @@ namespace Domain.Entities
         public int RegionID { get; set; }                   //[int] NOT NULL,
         public Region Region { get; set; }
 
-        public ICollection<EmployeeTerritory> EmployeeTerritories { get; set; }
+        public ICollection<EmployeeTerritory> EmployeeTerritories { get; private set; }
     }
 }

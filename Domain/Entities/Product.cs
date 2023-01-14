@@ -24,6 +24,6 @@ namespace Domain.Entities
 		public int? CategoryID { get; set; }         //[int] NULL,
 		public Category Category { get; set; }
 
-		public ICollection<OrderDetail> OrderDetails { get; set; }
+		public ICollection<OrderDetail> OrderDetails { get; private set; }
 	}
 }

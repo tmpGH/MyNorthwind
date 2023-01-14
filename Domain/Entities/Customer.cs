@@ -22,7 +22,7 @@ namespace Domain.Entities
 		public string Phone { get; set; }			//[nvarchar] (24) NULL,
 		public string Fax { get; set; }             //[nvarchar] (24) NULL,
 
-		public ICollection<CustomerCustomerDemo> CustomerCustomerDemos { get; set; }
-		public ICollection<Order> Orders { get; set; }
+		public ICollection<CustomerCustomerDemo> CustomerCustomerDemos { get; private set; }
+		public ICollection<Order> Orders { get; private set; }
 	}
 }

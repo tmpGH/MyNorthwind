@@ -16,6 +16,6 @@ namespace Domain.Entities
 		// TODO: Picture field
 		//[Picture] [image] NULL,
 
-		public IList<Product> Products { get; set; }
+		public ICollection<Product> Products { get; private set; }
 	}
 }

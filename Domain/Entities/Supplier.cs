@@ -24,6 +24,6 @@ namespace Domain.Entities
 		// TODO: is this a proper type ?
 		public string HomePage { get; set; }        //[ntext] NULL,
 		
-		public IList<Product> Products { get; set; }
+		public ICollection<Product> Products { get; private set; }
 	}
 }
