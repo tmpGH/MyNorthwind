@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Domain.Common;
+using System.Collections.Generic;
 
 namespace Domain.Entities
 {
-    public class Territory
+    public class Territory : AuditableEntity
     {
         public Territory()
         {

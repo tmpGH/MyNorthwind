@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Domain.Common;
+using System.Collections.Generic;
 
 namespace Domain.Entities
 {
-    public class Customer
-    {
+    public class Customer : AuditableEntity
+	{
 		public Customer()
         {
 			Orders = new List<Order>();

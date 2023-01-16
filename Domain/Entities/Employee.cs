@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Domain.Common;
+using System;
 using System.Collections.Generic;
 
 namespace Domain.Entities
 {
-    public class Employee
-    {
+    public class Employee : AuditableEntity
+	{
 		public Employee()
         {
 			Employees = new List<Employee>();

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Domain.Common;
+using System;
 
 namespace Domain.Entities
 {
-    public class OrderDetail
-    {
+    public class OrderDetail : AuditableEntity
+	{
 		public decimal UnitPrice { get; set; } //[money] NOT NULL,
 		public Int16 Quantity { get; set; }     //[smallint] NOT NULL,
 		public double Discount { get; set; }    //[real] NOT NULL,

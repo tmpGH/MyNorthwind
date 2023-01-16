@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Domain.Common;
+using System;
 using System.Collections.Generic;
 
 namespace Domain.Entities
 {
-    public class Product
-    {
+    public class Product : AuditableEntity
+	{
 		public Product()
 		{
 			OrderDetails = new List<OrderDetail>();

@@ -1,8 +1,11 @@
 ﻿using Application.Common.Interfaces;
+using Domain.Common;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Infrastructure.Persistance
 {
@@ -25,6 +28,48 @@ namespace Infrastructure.Persistance
         public DbSet<Shipper> Shippers { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Territory> Territories { get; set; }
+
+        public override int SaveChanges()
+        {
+            foreach(var entry in ChangeTracker.Entries<AuditableEntity>())
+            {
+                // TODO: set CreatedBy and LastModifiedBy
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        //entry.Entity.CreatedBy = _currentUserService.UserId;
+                        entry.Entity.Created = _dateTime.Now;
+                        break;
+                    case EntityState.Modified:
+                        //entry.Entity.LastModifiedBy = _currentUserService.UserId;
+                        entry.Entity.LastModified = _dateTime.Now;
+                        break;
+                }
+            }
+
+            return base.SaveChanges();
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+            {
+                // TODO: set CreatedBy
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        //entry.Entity.CreatedBy = _currentUserService.UserId;
+                        entry.Entity.Created = _dateTime.Now;
+                        break;
+                    case EntityState.Modified:
+                        //entry.Entity.LastModifiedBy = _currentUserService.UserId;
+                        entry.Entity.LastModified = _dateTime.Now;
+                        break;
+                }
+            }
+
+            return base.SaveChangesAsync();
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

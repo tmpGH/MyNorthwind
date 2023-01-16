@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Domain.Common;
+using System.Collections.Generic;
 
 namespace Domain.Entities
 {
-    public class CustomerDemographic
+    public class CustomerDemographic : AuditableEntity
     {
         public CustomerDemographic()
         {
