@@ -17,15 +17,27 @@ namespace WebApi
 
         public IConfiguration Configuration { get; }
 
+        private string MyAllowCORSOrigins => "_MyAllowCORSOrigins";
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddApplication();
             services.AddInfrastructure(Configuration);
-            
+
             services.AddControllers();
 
             services.AddSwaggerDocument();
+
+            // TODO: cors - address from settings
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowCORSOrigins, policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200");
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,8 +51,9 @@ namespace WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
             app.UseAuthorization();
+
+            app.UseCors(MyAllowCORSOrigins);
 
             app.UseEndpoints(endpoints =>
             {

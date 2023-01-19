@@ -27,6 +27,7 @@ namespace Application.Categories.Queries
         public Task<List<CategoryItemDto>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
         {
             var result = _context.Categories
+                .OrderBy(e => e.CategoryName)
                 .Skip((request.PageNumber - 1) * request.ItemsOnPage)
                 .Take(request.ItemsOnPage)
                 .ProjectTo<CategoryItemDto>(_mapper.ConfigurationProvider)
