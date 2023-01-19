@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoriesService } from '../categories.service';
+import { CategoryListItem } from '../model/category-list-item';
 
 @Component({
   selector: 'app-category-list',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryListComponent implements OnInit {
 
-  constructor() { }
+  categoryList: CategoryListItem[] = [];
+
+  constructor(private dataService: CategoriesService) { }
 
   ngOnInit(): void {
+    this.dataService.getCategoryList().subscribe(data => {
+      this.categoryList = data.map(x => x);
+    });
   }
-
 }

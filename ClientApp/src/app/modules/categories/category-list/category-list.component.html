@@ -1,1 +1,17 @@
-<p>category-list works!</p>
+<h3>Category list</h3>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">Name</th>
+			<th scope="col">Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let category of categoryList">
+			<td>{{ category.categoryName }}</td>
+			<td>{{ category.description }}</td>
+		</tr>
+	</tbody>
+</table>
+
