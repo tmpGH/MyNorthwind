@@ -3,33 +3,43 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    title: 'Categories',
     path: 'categories',
     loadChildren: () => import('./modules/categories/categories.module').then(m => m.CategoriesModule)
   }, {
+    title: 'Customers',
     path: 'customers',
     loadChildren: () => import('./modules/customers/customers.module').then(m => m.CustomersModule)
   }, {
-    path: 'employees', // TODO
-    redirectTo: 'categories'
+    title: 'Employees',
+    path: 'employees',
+    loadChildren: () => import('./modules/employees/employees.module').then(m => m.EmployeesModule)
   }, {
+    title: 'Orders',
     path: 'orders',
     loadChildren: () => import('./modules/orders/orders.module').then(m => m.OrdersModule)
   }, {
-    path: 'products', // TODO
-    redirectTo: 'categories'
+    title: 'Products',
+    path: 'products',
+    loadChildren: () => import('./modules/products/products.module').then(m => m.ProductsModule)
   }, {
-    path: 'regions', // TODO
-    redirectTo: 'categories'
+    title: 'Regions',
+    path: 'regions',
+    loadChildren: () => import('./modules/regions/regions.module').then(m => m.RegionsModule)
   }, {
-    path: 'shippers', // TODO
-    redirectTo: 'categories'
+    title: 'Shippers',
+    path: 'shippers',
+    loadChildren: () => import('./modules/shippers/shippers.module').then(m => m.ShippersModule)
   }, {
-    path: 'suppliers', // TODO
-    redirectTo: 'categories'
+    title: 'Suppliers',
+    path: 'suppliers',
+    loadChildren: () => import('./modules/suppliers/suppliers.module').then(m => m.SuppliersModule)
   }, {
-    path: 'territories', // TODO
-    redirectTo: 'categories'
+    title: 'Territories',
+    path: 'territories',
+    loadChildren: () => import('./modules/territories/territories.module').then(m => m.TerritoriesModule)
   }, {
+    title: 'Login',
     path: 'login',
     loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
   }, {
@@ -37,6 +47,7 @@ const routes: Routes = [
     redirectTo: 'categories'
   }
 ];
+export const APP_ROUTES = routes;
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,7 +1,7 @@
 <div class="container">
   <ul ngbNav #nav="ngbNav" [(activeId)]="activeMenuItemId" class="nav-tabs row">
-    <li class="col-sm" *ngFor="let item of menuItems" [ngbNavItem]="item.id">
-      <a ngbNavLink [routerLink]="item.route">{{ item.title }}</a>
+    <li class="col-sm" *ngFor="let item of menuItems" [ngbNavItem]="item.title">
+      <a ngbNavLink [routerLink]="item.path">{{ item.title }}</a>
       <ng-template ngbNavContent>
         <router-outlet></router-outlet>
       </ng-template>
