@@ -14,8 +14,6 @@ namespace Infrastructure.Persistance.Configurations
                 .HasDefaultValue(1);
             builder.Property(e => e.Discount)
                 .HasDefaultValue(0);
-
-            // TODO: check constraints
         }
     }
 }

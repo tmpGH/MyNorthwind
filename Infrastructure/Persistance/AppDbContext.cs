@@ -54,7 +54,7 @@ namespace Infrastructure.Persistance
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
             {
-                // TODO: set CreatedBy
+                // TODO: set CreatedBy and LastModifiedBy
                 switch (entry.State)
                 {
                     case EntityState.Added:
