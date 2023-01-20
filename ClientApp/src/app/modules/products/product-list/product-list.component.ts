@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductListItem } from '../model/product-list-item';
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-product-list',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductListComponent implements OnInit {
 
-  constructor() { }
+  items: ProductListItem[] = [];
+  pageNumber = 1;
+  pageSize = 10;
+
+  constructor(private dataService: ProductsService) { }
 
   ngOnInit(): void {
+    this.refreshList();
   }
 
+  refreshList() {
+    this.dataService.getProductList().subscribe(data => {
+      this.items = data.map(x => x);
+    });
+  }
 }

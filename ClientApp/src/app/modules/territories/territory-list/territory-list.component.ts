@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TerritoryListItem } from '../model/territory-list-item';
+import { TerritoriesService } from '../territories.service';
 
 @Component({
   selector: 'app-territory-list',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TerritoryListComponent implements OnInit {
 
-  constructor() { }
+  items: TerritoryListItem[] = [];
+  pageNumber = 1;
+  pageSize = 10;
+
+  constructor(private dataService: TerritoriesService) { }
 
   ngOnInit(): void {
+    this.refreshList();
   }
 
+  refreshList() {
+    this.dataService.getTeritoryList().subscribe(data => {
+      this.items = data.map(x => x);
+    });
+  }
 }

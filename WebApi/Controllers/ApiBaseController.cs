@@ -12,6 +12,6 @@ namespace WebApi.Controllers
 
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
-        protected virtual int ItemsOnPage => 3;
+        protected virtual int ItemsOnPage => 10;
     }
 }

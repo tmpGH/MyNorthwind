@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RegionListItem } from '../model/region-list-item';
+import { RegionsService } from '../regions.service';
 
 @Component({
   selector: 'app-region-list',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegionListComponent implements OnInit {
 
-  constructor() { }
+  items: RegionListItem[] = [];
+  pageNumber = 1;
+  pageSize = 10;
+
+  constructor(private dataService: RegionsService) { }
 
   ngOnInit(): void {
+    this.refreshList();
   }
 
+  refreshList() {
+    this.dataService.getRegionList().subscribe(data => {
+      this.items = data.map(x => x);
+    });
+  }
 }

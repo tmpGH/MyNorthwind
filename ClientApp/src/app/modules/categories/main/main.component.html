@@ -1,0 +1,24 @@
+<div class="d-flex">
+	<ul ngbNav #nav="ngbNav" [(activeId)]="activeNavItem" class="nav-pills m-1" orientation="vertical">
+		<li ngbNavItem="item1" >
+			<a ngbNavLink routerLink="">Category list</a>
+			<ng-template ngbNavContent>
+        <router-outlet></router-outlet>
+			</ng-template>
+		</li>
+		<li ngbNavItem="item2">
+			<a ngbNavLink routerLink="">Category search</a>
+			<ng-template ngbNavContent>
+        <router-outlet></router-outlet>
+			</ng-template>
+		</li>
+		<li ngbNavItem="item3">
+			<a ngbNavLink routerLink="">Category details</a>
+			<ng-template ngbNavContent>
+        <router-outlet></router-outlet>
+			</ng-template>
+		</li>
+	</ul>
+  <div class="vr"></div>
+	<div [ngbNavOutlet]="nav" class="m-3 mt-1 col-md"></div>
+</div>

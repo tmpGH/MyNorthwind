@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderListItem } from '../model/order-list-item';
+import { OrdersService } from '../orders.service';
 
 @Component({
   selector: 'app-order-list',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderListComponent implements OnInit {
 
-  constructor() { }
+  items: OrderListItem[] = [];
+  pageNumber = 1;
+  pageSize = 10;
+
+  constructor(private dataService: OrdersService) { }
 
   ngOnInit(): void {
+    this.refreshList();
   }
 
+  refreshList() {
+    this.dataService.getOrderList().subscribe(data => {
+      this.items = data.map(x => x);
+    });
+  }
 }

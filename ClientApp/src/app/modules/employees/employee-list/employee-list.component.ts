@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EmployeesService } from '../employees.service';
+import { EmployeeListItem } from '../model/employee-list-item';
 
 @Component({
   selector: 'app-employee-list',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeListComponent implements OnInit {
 
-  constructor() { }
+  items: EmployeeListItem[] = [];
+  pageNumber = 1;
+  pageSize = 10;
+
+  constructor(private dataService: EmployeesService) { }
 
   ngOnInit(): void {
+    this.refreshList();
   }
 
+  refreshList() {
+    this.dataService.getEmployeeList().subscribe(data => {
+      this.items = data.map(x => x);
+    });
+  }
 }

@@ -10,8 +10,6 @@ namespace WebApi.Controllers
     [ApiController]
     public class CategoriesController : ApiBaseController
     {
-        protected override int ItemsOnPage => 10;
-
         // GET: api/<CategoriesController>
         [HttpGet]
         public async Task<ActionResult<List<CategoryItemDto>>> Get(int? pageNumber)
