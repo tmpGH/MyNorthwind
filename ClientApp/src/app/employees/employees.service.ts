@@ -1,13 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { ApiService } from '../shared/api-service';
+import { ApiServiceBase } from '../core/services/api-service-base';
 import { EmployeeListItem } from './model/employee-list-item';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class EmployeesService extends ApiService {
+@Injectable()
+export class EmployeesService extends ApiServiceBase {
 
   private readonly apiUrl = environment.apiUrl + '/employees';
 

@@ -4,6 +4,7 @@ import { TerritoryListComponent } from './territory-list/territory-list.componen
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { NgbAccordionModule, NgbNavModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { TerritoriesService } from './territories.service';
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
     NgbPaginationModule,
     NgbNavModule 
   ],
+  providers: [TerritoriesService],
   exports: [RouterModule]
 })
 export class TerritoriesModule { }

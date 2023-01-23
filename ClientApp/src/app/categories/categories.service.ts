@@ -2,12 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CategoryListItem } from './model/category-list-item';
 import { environment } from 'src/environments/environment';
-import { ApiService } from '../shared/api-service';
+import { ApiServiceBase } from '../core/services/api-service-base';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class CategoriesService extends ApiService {
+@Injectable()
+export class CategoriesService extends ApiServiceBase {
 
   private readonly apiUrl = environment.apiUrl + '/categories';
 

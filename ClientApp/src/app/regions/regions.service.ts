@@ -1,13 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { ApiService } from '../shared/api-service';
+import { ApiServiceBase } from '../core/services/api-service-base';
 import { RegionListItem } from './model/region-list-item';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class RegionsService extends ApiService {
+@Injectable()
+export class RegionsService extends ApiServiceBase {
 
   private readonly apiUrl = environment.apiUrl + '/regions';
 

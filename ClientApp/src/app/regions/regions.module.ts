@@ -4,6 +4,7 @@ import { RegionListComponent } from './region-list/region-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { NgbAccordionModule, NgbNavModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { RegionsService } from './regions.service';
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
     NgbPaginationModule,
     NgbNavModule 
   ],
+  providers: [RegionsService],
   exports: [RouterModule]
 })
 export class RegionsModule { }

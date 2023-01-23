@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 
-export abstract class ApiService {
+export abstract class ApiServiceBase {
   
   constructor(protected http: HttpClient) { }
   

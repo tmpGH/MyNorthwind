@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { MainComponent } from './main/main.component';
 import { NgbAccordionModule, NgbDropdownModule, NgbNavModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryDetailsComponent } from './category-details/category-details.component';
+import { CategoriesService } from './categories.service';
 
 const routes: Routes = [
   {
@@ -34,6 +35,7 @@ const routes: Routes = [
     NgbPaginationModule,
     NgbNavModule 
   ],
+  providers: [CategoriesService],
   exports: [RouterModule]
 })
 export class CategoriesModule { }

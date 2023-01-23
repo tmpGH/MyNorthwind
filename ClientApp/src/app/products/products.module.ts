@@ -4,6 +4,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { NgbAccordionModule, NgbNavModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductsService } from './products.service';
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
     NgbPaginationModule,
     NgbNavModule 
   ],
+  providers: [ProductsService],
   exports: [RouterModule]
 })
 export class ProductsModule { }

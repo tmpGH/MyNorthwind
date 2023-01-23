@@ -1,13 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { ApiService } from '../shared/api-service';
+import { ApiServiceBase } from '../core/services/api-service-base';
 import { TerritoryListItem } from './model/territory-list-item';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class TerritoriesService extends ApiService {
+@Injectable()
+export class TerritoriesService extends ApiServiceBase {
 
   private readonly apiUrl = environment.apiUrl + '/territories';
 
