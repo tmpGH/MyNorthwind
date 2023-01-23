@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ContextMenuItem, ListContextMenuComponent } from 'src/app/shared/components/list-context-menu/list-context-menu.component';
 import { CategoriesService } from '../categories.service';
 import { CategoryListItem } from '../model/category-list-item';
 
@@ -11,14 +12,24 @@ import { CategoryListItem } from '../model/category-list-item';
 export class CategoryListComponent implements OnInit {
 
   items: CategoryListItem[] = [];
+  selectedItem?: CategoryListItem;
   pageNumber = 1;
   pageSize = 10;
-  
-  @ViewChild('dropdownMenu') dropdownmenu!: NgbDropdown;
-  menuPosition =  {left: '0', top: '0'}
-  selectedItem: CategoryListItem | undefined;
 
-  constructor(private dataService: CategoriesService) { }
+  @ViewChild('contextMenu') contextmenu!: ListContextMenuComponent;
+  contextMenuItems: ContextMenuItem[] = [{
+    text: 'Show category details',
+    action: () => this.showCategory(),
+    disabled: false
+  }, {
+    text: '',
+    disabled: false
+  }, {
+    text: 'Another action',
+    disabled: true
+  }];
+
+  constructor(private dataService: CategoriesService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.refreshList();
@@ -26,22 +37,18 @@ export class CategoryListComponent implements OnInit {
 
   onRightClick(event: MouseEvent, item: CategoryListItem) { 
     event.preventDefault(); 
-
     this.selectedItem = item;
-
-    this.menuPosition.left = event.clientX + 'px'; 
-    this.menuPosition.top = event.clientY + 'px'; 
-
-    this.dropdownmenu.open();
+    this.contextmenu.open(event.clientX, event.clientY);
   }
   
-  showCategory() {
-    console.log(this.selectedItem);
-  }
-
   refreshList() {
     this.dataService.getCategoryList().subscribe(data => {
       this.items = data.map(x => x);
     });
+  }
+
+  showCategory() {
+    let id = this.selectedItem?.categoryID;
+    this.router.navigate(['.', id], {relativeTo: this.route});
   }
 }

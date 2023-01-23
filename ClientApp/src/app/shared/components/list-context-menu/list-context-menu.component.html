@@ -1,0 +1,14 @@
+<div #dropdownMenu="ngbDropdown" ngbDropdown
+	style="position: fixed;"
+	[style.left]="menuPosition.left"
+	[style.top]="menuPosition.top"
+>
+	<div class="dropdown-menu" ngbDropdownMenu>
+		<ng-container *ngFor="let item of menuItems">
+			<button *ngIf="item.text != ''" ngbDropdownItem (click)="invokeAction(item)" [disabled]="item.disabled">
+				{{item.text}}
+			</button>
+			<div *ngIf="item.text == ''" class="dropdown-divider"></div>
+    </ng-container>
+	</div>
+</div>

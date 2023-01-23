@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CategoryListItem } from './model/category-list-item';
 import { environment } from 'src/environments/environment';
-import { ApiServiceBase } from '../core/services/api-service-base';
+import { ApiServiceBase } from '../core/abstractions/api-service-base';
+import { CategoryDetails } from './model/category-details';
 
 @Injectable()
 export class CategoriesService extends ApiServiceBase {
@@ -20,7 +21,6 @@ export class CategoriesService extends ApiServiceBase {
   // }
 
   getCategory(id: number) {
-    return this.getDetails<CategoryListItem>(this.apiUrl, id);
+    return this.getDetails<CategoryDetails>(this.apiUrl, id);
   }
-
 }

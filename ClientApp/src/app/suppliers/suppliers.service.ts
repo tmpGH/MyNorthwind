@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { ApiServiceBase } from '../core/services/api-service-base';
+import { ApiServiceBase } from '../core/abstractions/api-service-base';
+import { SupplierDetails } from './model/supplier-details';
 import { SupplierListItem } from './model/supplier-list-item';
 
 @Injectable()
@@ -15,4 +16,7 @@ export class SuppliersService extends ApiServiceBase {
     return this.getListPage<SupplierListItem>(this.apiUrl, pageNumber);
   }
 
+  getSupplier(id: number) {
+    return this.getDetails<SupplierDetails>(this.apiUrl, id);
+  }
 }

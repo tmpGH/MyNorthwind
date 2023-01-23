@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CategoriesService } from '../categories.service';
+import { CategoryDetails } from '../model/category-details';
 
 @Component({
   selector: 'app-category-details',
@@ -7,11 +9,13 @@ import { CategoriesService } from '../categories.service';
   styleUrls: ['./category-details.component.css']
 })
 export class CategoryDetailsComponent implements OnInit {
-
   
-  constructor(private dataService: CategoriesService) { }
+  data?: CategoryDetails;
+  
+  constructor(private dataService: CategoriesService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    let id = this.route.snapshot.params['id'];
+    this.dataService.getCategory(id).subscribe( value => this.data = value );
   }
-
 }

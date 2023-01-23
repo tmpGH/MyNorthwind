@@ -3,16 +3,19 @@ import { CategoryListComponent } from './category-list/category-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MainComponent } from './main/main.component';
-import { NgbAccordionModule, NgbDropdownModule, NgbNavModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbNavModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryDetailsComponent } from './category-details/category-details.component';
 import { CategoriesService } from './categories.service';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
     component: MainComponent,
     children: [{
+      path: ':id',
+      component: CategoryDetailsComponent,
+    }, {
       path: '',
       pathMatch: 'full',
       component: CategoryListComponent,
@@ -30,10 +33,10 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     NgbAccordionModule,
-    NgbDropdownModule,
     NgbTypeaheadModule,
     NgbPaginationModule,
-    NgbNavModule 
+    NgbNavModule,
+    SharedModule
   ],
   providers: [CategoriesService],
   exports: [RouterModule]

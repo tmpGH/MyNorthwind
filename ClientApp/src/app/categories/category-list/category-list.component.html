@@ -24,15 +24,4 @@
 	</ngb-pagination>
 </div>
 
-<div #dropdownMenu="ngbDropdown" ngbDropdown
-	style="position: fixed;"
-	[style.left]="menuPosition.left"
-	[style.top]="menuPosition.top"
->
-	<div class="dropdown-menu" ngbDropdownMenu>
-		<button ngbDropdownItem disabled>Action</button>
-		<button ngbDropdownItem disabled>Another action</button>
-		<div class="dropdown-divider"></div>
-		<button ngbDropdownItem (click)="showCategory()">Show category details</button>
-	</div>
-</div>
+<app-list-context-menu #contextMenu [menuItems]="contextMenuItems"></app-list-context-menu>

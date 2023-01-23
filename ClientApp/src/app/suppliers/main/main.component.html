@@ -1,18 +1,18 @@
 <div class="d-flex">
 	<ul ngbNav #nav="ngbNav" [(activeId)]="activeNavItem" class="nav-pills m-1" orientation="vertical">
-		<li ngbNavItem="item1" >
+		<li ngbNavItem="list" >
 			<a ngbNavLink routerLink="./">Supplier list</a>
 			<ng-template ngbNavContent>
         <router-outlet></router-outlet>
 			</ng-template>
 		</li>
-		<li ngbNavItem="item2">
+		<li ngbNavItem="search">
 			<a ngbNavLink routerLink="./">Supplier search</a>
 			<ng-template ngbNavContent>
         <router-outlet></router-outlet>
 			</ng-template>
 		</li>
-		<li ngbNavItem="item3">
+		<li ngbNavItem="details" [disabled]="true">
 			<a ngbNavLink routerLink="./">Supplier details</a>
 			<ng-template ngbNavContent>
         <router-outlet></router-outlet>

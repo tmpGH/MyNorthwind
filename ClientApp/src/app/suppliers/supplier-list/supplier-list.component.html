@@ -12,7 +12,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr *ngFor="let item of items">
+		<tr *ngFor="let item of items" (contextmenu)="onRightClick($event, item)">
 			<td>{{ item.companyName }}</td>
 			<td>{{ item.address }}</td>
 			<td>{{ item.city }}</td>
@@ -31,3 +31,5 @@
 	>
 	</ngb-pagination>
 </div>
+
+<app-list-context-menu #contextMenu [menuItems]="contextMenuItems"></app-list-context-menu>

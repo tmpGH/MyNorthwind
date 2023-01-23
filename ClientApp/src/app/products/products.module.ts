@@ -5,13 +5,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { NgbAccordionModule, NgbNavModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsService } from './products.service';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
     component: MainComponent,
     children: [{
+      path: ':id',
+      component: ProductDetailsComponent,
+    }, {
       path: '',
       pathMatch: 'full',
       component: ProductListComponent,
@@ -22,7 +26,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     MainComponent,
-    ProductListComponent
+    ProductListComponent,
+    ProductDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +35,8 @@ const routes: Routes = [
     NgbAccordionModule,
     NgbTypeaheadModule,
     NgbPaginationModule,
-    NgbNavModule 
+    NgbNavModule,
+    SharedModule
   ],
   providers: [ProductsService],
   exports: [RouterModule]
