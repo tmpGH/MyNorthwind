@@ -17,8 +17,12 @@ export class CategoriesService extends ApiService {
     return this.getListPage<CategoryListItem>(this.apiUrl, pageNumber);
   }
 
-  getCategoryListCount() {
-    return this.getListCount(this.apiUrl);
+  // getCategoryListCount() {
+  //   return this.getListCount(this.apiUrl);
+  // }
+
+  getCategory(id: number) {
+    return this.getDetails<CategoryListItem>(this.apiUrl, id);
   }
 
 }

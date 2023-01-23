@@ -11,5 +11,10 @@ export abstract class ApiService {
   getListPage<T>(apiUrl: string, pageNumber: number = 1) {
     let params = new HttpParams().set('pageNumber', pageNumber);
     return this.http.get<T[]>(apiUrl, { params });
-  }  
+  }
+
+  getDetails<T>(apiUrl: string, id: number) {
+    return this.http.get<T>(apiUrl + '/' + id );
+  }
+
 }

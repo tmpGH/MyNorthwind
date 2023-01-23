@@ -3,7 +3,8 @@ import { CategoryListComponent } from './category-list/category-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MainComponent } from './main/main.component';
-import { NgbAccordionModule, NgbNavModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbDropdownModule, NgbNavModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { CategoryDetailsComponent } from './category-details/category-details.component';
 
 const routes: Routes = [
   {
@@ -21,12 +22,14 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     MainComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    CategoryDetailsComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     NgbAccordionModule,
+    NgbDropdownModule,
     NgbTypeaheadModule,
     NgbPaginationModule,
     NgbNavModule 

@@ -1,0 +1,38 @@
+<h3>Category list</h3>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">Name</th>
+			<th scope="col">Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let item of items" (contextmenu)="onRightClick($event, item)">
+			<td>{{ item.categoryName }}</td>
+			<td>{{ item.description }}</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="d-flex justify-content-between p-2">
+	<ngb-pagination [collectionSize]="pageSize"
+    [(page)]="pageNumber"
+    [pageSize]="pageSize"
+		(pageChange)="refreshList()"
+	>
+	</ngb-pagination>
+</div>
+
+<div #dropdownMenu="ngbDropdown" ngbDropdown
+	style="position: fixed;"
+	[style.left]="menuPosition.left"
+	[style.top]="menuPosition.top"
+>
+	<div class="dropdown-menu" ngbDropdownMenu>
+		<button ngbDropdownItem disabled>Action</button>
+		<button ngbDropdownItem disabled>Another action</button>
+		<div class="dropdown-divider"></div>
+		<button ngbDropdownItem (click)="showCategory()">Show category details</button>
+	</div>
+</div>
