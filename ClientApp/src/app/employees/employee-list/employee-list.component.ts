@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ContextMenuItem, ListContextMenuComponent } from 'src/app/shared/components/list-context-menu/list-context-menu.component';
+import { ContextMenuItem } from 'src/app/shared/components/context-menu-item';
+import { ListContextMenuComponent } from 'src/app/shared/components/list-context-menu/list-context-menu.component';
 import { EmployeesService } from '../employees.service';
 import { EmployeeListItem } from '../model/employee-list-item';
 

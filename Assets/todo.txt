@@ -1,6 +1,8 @@
 - correct field types in entities
 
 --------------------
+- create login page
+- create logout button
 
 --------------------
 - add logging

@@ -9,9 +9,10 @@ import { MainComponentBase } from 'src/app/core/abstractions/main-component-base
 })
 export class MainComponent extends MainComponentBase implements OnInit {
 
-  override area: string = 'employees';
-
-  constructor(router: Router) { super(router) }
+  constructor(router: Router) {
+    super(router);
+    this.area= 'employees';
+  }
   
   ngOnInit(): void {
     this.selectMenuItem();

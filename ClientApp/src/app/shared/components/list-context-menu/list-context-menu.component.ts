@@ -1,5 +1,6 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { ContextMenuItem } from '../context-menu-item';
 
 @Component({
   selector: 'app-list-context-menu',
@@ -25,10 +26,4 @@ export class ListContextMenuComponent {
       menuItem.action();
     }
   }
-}
-
-export class ContextMenuItem {
-  text?: string;
-  action?: () => void;
-  disabled: boolean = false;
 }

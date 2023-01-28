@@ -11,7 +11,7 @@ import { CategoryDetails } from '../model/category-details';
 export class CategoryDetailsComponent implements OnInit {
   
   data?: CategoryDetails;
-  
+
   constructor(private dataService: CategoriesService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {

@@ -3,7 +3,7 @@ import { Event, NavigationEnd, Router } from '@angular/router';
 export abstract class MainComponentBase {
 
   protected area: string = '';
-  activeNavItem?: string;
+  protected activeNavItem?: string;
 
   constructor(protected router: Router) { }
 
