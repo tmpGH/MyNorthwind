@@ -12,11 +12,13 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("NorthwindDatabase")));
-            services.AddScoped<IAppDbContext>(provider => provider.GetService<AppDbContext>());
-
-            services.AddTransient<IDateTime, DateTimeService>();
+            services
+                .AddDbContext<AppDbContext>( options =>
+                    options.UseSqlServer(configuration.GetConnectionString("NorthwindDatabase")) )
+                .AddScoped<IAppDbContext>(provider => provider.GetService<AppDbContext>())
+            
+                .AddScoped<ICurrentUserService, CurrentUserService>()
+                .AddTransient<IDateTime, DateTimeService>();
 
             return services;
         }

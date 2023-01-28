@@ -12,10 +12,12 @@ namespace Infrastructure.Persistance
     public class AppDbContext : DbContext, IAppDbContext
     {
         private readonly IDateTime _dateTime;
+        private readonly ICurrentUserService _currentUserService;
 
-        public AppDbContext(DbContextOptions options, IDateTime dateTime) : base(options)
+        public AppDbContext(DbContextOptions options, IDateTime dateTime, ICurrentUserService currentUserService) : base(options)
         {
             _dateTime = dateTime;
+            _currentUserService = currentUserService;
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -33,15 +35,14 @@ namespace Infrastructure.Persistance
         {
             foreach(var entry in ChangeTracker.Entries<AuditableEntity>())
             {
-                // TODO: set CreatedBy and LastModifiedBy
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        //entry.Entity.CreatedBy = _currentUserService.UserId;
+                        entry.Entity.CreatedBy = _currentUserService.UserId;
                         entry.Entity.Created = _dateTime.Now;
                         break;
                     case EntityState.Modified:
-                        //entry.Entity.LastModifiedBy = _currentUserService.UserId;
+                        entry.Entity.LastModifiedBy = _currentUserService.UserId;
                         entry.Entity.LastModified = _dateTime.Now;
                         break;
                 }
@@ -54,15 +55,14 @@ namespace Infrastructure.Persistance
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
             {
-                // TODO: set CreatedBy and LastModifiedBy
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        //entry.Entity.CreatedBy = _currentUserService.UserId;
+                        entry.Entity.CreatedBy = _currentUserService.UserId;
                         entry.Entity.Created = _dateTime.Now;
                         break;
                     case EntityState.Modified:
-                        //entry.Entity.LastModifiedBy = _currentUserService.UserId;
+                        entry.Entity.LastModifiedBy = _currentUserService.UserId;
                         entry.Entity.LastModified = _dateTime.Now;
                         break;
                 }
