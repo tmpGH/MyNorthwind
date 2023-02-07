@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListContextMenuComponent } from './components/list-context-menu/list-context-menu.component';
+import { ListContextMenuComponent } from './ui/list-context-menu/list-context-menu.component';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({

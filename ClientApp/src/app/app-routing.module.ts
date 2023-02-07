@@ -1,43 +1,43 @@
-import { NgModule } from '@angular/core';
+// import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     title: 'Categories',
     path: 'categories',
-    loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
+    loadChildren: () => import('./categories/feature/client-shell/categories.module').then(m => m.CategoriesModule)
   }, {
     title: 'Customers',
     path: 'customers',
-    loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule)
+    loadChildren: () => import('./customers/feature/client-shell/customers.module').then(m => m.CustomersModule)
   }, {
     title: 'Employees',
     path: 'employees',
-    loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule)
+    loadChildren: () => import('./employees/feature/client-shell/employees.module').then(m => m.EmployeesModule)
   }, {
     title: 'Orders',
     path: 'orders',
-    loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
+    loadChildren: () => import('./orders/feature/client-shell/orders.module').then(m => m.OrdersModule)
   }, {
     title: 'Products',
     path: 'products',
-    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
+    loadChildren: () => import('./products/feature/client-shell/products.module').then(m => m.ProductsModule)
   }, {
     title: 'Regions',
     path: 'regions',
-    loadChildren: () => import('./regions/regions.module').then(m => m.RegionsModule)
+    loadChildren: () => import('./regions/feature/client-shell/regions.module').then(m => m.RegionsModule)
   }, {
     title: 'Shippers',
     path: 'shippers',
-    loadChildren: () => import('./shippers/shippers.module').then(m => m.ShippersModule)
+    loadChildren: () => import('./shippers/feature/client-shell/shippers.module').then(m => m.ShippersModule)
   }, {
     title: 'Suppliers',
     path: 'suppliers',
-    loadChildren: () => import('./suppliers/suppliers.module').then(m => m.SuppliersModule)
+    loadChildren: () => import('./suppliers/feature/client-shell/suppliers.module').then(m => m.SuppliersModule)
   }, {
     title: 'Territories',
     path: 'territories',
-    loadChildren: () => import('./territories/territories.module').then(m => m.TerritoriesModule)
+    loadChildren: () => import('./territories/feature/client-shell/territories.module').then(m => m.TerritoriesModule)
   }, {
     title: 'Login',
     path: 'login',
@@ -53,8 +53,8 @@ export function getActiveRouteOrFirst(url: string) {
   return APP_ROUTES.find(r => r.path == fragment) ?? APP_ROUTES[0];
 }
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
+// @NgModule({
+//   imports: [RouterModule.forRoot(routes)],
+//   exports: [RouterModule]
+// })
+// export class AppRoutingModule { }
