@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ContextMenuItem } from 'src/app/shared/ui/list-context-menu/context-menu-item';
 import { ListContextMenuComponent } from 'src/app/shared/ui/list-context-menu/list-context-menu.component';
+import { CategoriesState, CategoryListItem } from '../../data-access/categories-state';
 import { CategoriesService } from '../../data-access/categories.service';
-import { CategoryListItem } from '../../data-access/category-list-item';
 
 @Component({
   selector: 'app-category-list',
@@ -13,25 +13,29 @@ import { CategoryListItem } from '../../data-access/category-list-item';
 })
 export class CategoryListComponent implements OnInit {
 
-  items$: Observable<CategoryListItem[]>;
-  selectedItem?: CategoryListItem;
+  state$: Observable<CategoriesState>;
   pageNumber = 1;
   pageSize = 10;
 
-  @ViewChild('contextMenu') contextmenu!: ListContextMenuComponent;
+  selectedItemId?: Number;
   contextMenuItems: ContextMenuItem[] = [{
     text: 'Show category details',
     action: () => this.showCategory(),
-    disabled: false
+    disabled: false,
+    isSeparator: false
   }, {
-    text: '',
-    disabled: false
+    disabled: false,
+    isSeparator: true
   }, {
     text: 'Another action',
-    disabled: true
+    disabled: true,
+    isSeparator: false
   }];
+  @ViewChild('contextMenu') contextmenu: ListContextMenuComponent;
 
-  constructor(private dataService: CategoriesService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private dataService: CategoriesService, private router: Router, private route: ActivatedRoute) {
+    this.state$ = dataService.state$;
+  }
 
   ngOnInit(): void {
     this.refreshList();
@@ -39,16 +43,15 @@ export class CategoryListComponent implements OnInit {
 
   onRightClick(event: MouseEvent, item: CategoryListItem) { 
     event.preventDefault(); 
-    this.selectedItem = item;
+    this.selectedItemId = item.categoryID;
     this.contextmenu.open(event.clientX, event.clientY);
   }
   
   refreshList() {
-    this.items$ = this.dataService.getCategoryList();
+    this.dataService.getCategoryList();
   }
 
   showCategory() {
-    let id = this.selectedItem?.categoryID;
-    this.router.navigate(['.', id], {relativeTo: this.route});
+    this.router.navigate(['.', this.selectedItemId], {relativeTo: this.route});
   }
 }

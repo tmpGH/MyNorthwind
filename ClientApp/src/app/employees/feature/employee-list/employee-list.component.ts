@@ -18,18 +18,20 @@ export class EmployeeListComponent implements OnInit {
   pageNumber = 1;
   pageSize = 10;
 
-  @ViewChild('contextMenu') contextmenu!: ListContextMenuComponent;
   contextMenuItems: ContextMenuItem[] = [{
     text: 'Show employee details',
     action: () => this.showEmployee(),
-    disabled: false
+    disabled: false,
+    isSeparator: false
   }, {
-    text: '',
-    disabled: false
+    disabled: false,
+    isSeparator: true
   }, {
     text: 'Another action',
-    disabled: true
+    disabled: false,
+    isSeparator: false
   }];
+  @ViewChild('contextMenu') contextmenu: ListContextMenuComponent;
 
   constructor(private dataService: EmployeesService, private router: Router, private route: ActivatedRoute) { }
 

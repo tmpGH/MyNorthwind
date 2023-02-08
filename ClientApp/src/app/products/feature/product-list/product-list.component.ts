@@ -18,18 +18,20 @@ export class ProductListComponent implements OnInit {
   pageNumber = 1;
   pageSize = 10;
 
-  @ViewChild('contextMenu') contextmenu!: ListContextMenuComponent;
   contextMenuItems: ContextMenuItem[] = [{
     text: 'Show product details',
     action: () => this.showProduct(),
-    disabled: false
+    disabled: false,
+    isSeparator: false
   }, {
-    text: '',
-    disabled: false
+    disabled: false,
+    isSeparator: true
   }, {
     text: 'Another action',
-    disabled: true
+    disabled: false,
+    isSeparator: false
   }];
+  @ViewChild('contextMenu') contextmenu: ListContextMenuComponent;
   
   constructor(private dataService: ProductsService, private router: Router, private route: ActivatedRoute) { }
 

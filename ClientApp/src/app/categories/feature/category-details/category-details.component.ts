@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CategoriesService } from '../../data-access/categories.service';
-import { CategoryDetails } from '../../data-access/category-details';
+import { CategoryDetails } from '../../data-access/categories-state';
 
 @Component({
   selector: 'app-category-details',
