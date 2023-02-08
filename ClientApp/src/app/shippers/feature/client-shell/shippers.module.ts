@@ -8,12 +8,14 @@ import { SharedModule } from '../../../shared/shared.module';
 import { ShippersService } from '../../data-access/shippers.service';
 import { ShipperListComponent } from '../shipper-list/shipper-list.component';
 import { ShippersRoutingModule } from './shippers-routing.module';
+import { ShipperSearchComponent } from '../shipper-search/shipper-search.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     ShipperListComponent,
-    ShipperDetailsComponent
+    ShipperDetailsComponent,
+    ShipperSearchComponent
   ],
   imports: [
     CommonModule,

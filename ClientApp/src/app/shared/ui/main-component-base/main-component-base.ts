@@ -12,6 +12,7 @@ export abstract class MainComponentBase {
       if(event instanceof NavigationEnd) {
         // TODO: change
         let items = event.url.split('/');
+        console.log(items);
         this.activeNavItem = ((items[1] == this.area) && items[2]) ? 'details' : 'list';
       }
     });

@@ -15,7 +15,6 @@ const routes: Routes = [
       component: CategoryListComponent,
     }, {
       path: 'search',
-      pathMatch: 'full',
       component: CategorySearchComponent,
     }, {
       path: ':id',

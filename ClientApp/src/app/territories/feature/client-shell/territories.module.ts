@@ -8,12 +8,14 @@ import { SharedModule } from '../../../shared/shared.module';
 import { TerritoriesService } from '../../data-access/territories.service';
 import { TerritoryListComponent } from '../territory-list/territory-list.component';
 import { TerritoriesRoutingModule } from './territories-routing.module';
+import { TerritorySearchComponent } from '../territory-search/territory-search.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     TerritoryListComponent,
-    TerritoryDetailsComponent
+    TerritoryDetailsComponent,
+    TerritorySearchComponent
   ],
   imports: [
     CommonModule,

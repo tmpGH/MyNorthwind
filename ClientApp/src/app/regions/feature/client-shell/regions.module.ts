@@ -8,12 +8,14 @@ import { RegionDetailsComponent } from '../region-details/region-details.compone
 import { SharedModule } from '../../../shared/shared.module';
 import { RegionsService } from '../../data-access/regions.service';
 import { RegionsRoutingModule } from './regions-routing.module';
+import { RegionSearchComponent } from '../region-search/region-search.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     RegionListComponent,
-    RegionDetailsComponent
+    RegionDetailsComponent,
+    RegionSearchComponent
   ],
   imports: [
     CommonModule,

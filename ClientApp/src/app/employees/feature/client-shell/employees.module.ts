@@ -8,12 +8,14 @@ import { EmployeeDetailsComponent } from '../employee-details/employee-details.c
 import { SharedModule } from '../../../shared/shared.module';
 import { EmployeesService } from '../../data-access/employees.service';
 import { EmployeesRoutingModule } from './employees-routing.module';
+import { EmployeeSearchComponent } from '../employee-search/employee-search.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     EmployeeListComponent,
-    EmployeeDetailsComponent
+    EmployeeDetailsComponent,
+    EmployeeSearchComponent
   ],
   imports: [
     CommonModule,

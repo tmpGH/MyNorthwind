@@ -8,12 +8,14 @@ import { OrderDetailsComponent } from '../order-details/order-details.component'
 import { SharedModule } from '../../../shared/shared.module';
 import { OrdersService } from '../../data-access/orders.service';
 import { OrdersRoutingModule } from './orders-routing.module';
+import { OrderSearchComponent } from '../order-search/order-search.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     OrderListComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    OrderSearchComponent
   ],
   imports: [
     CommonModule,

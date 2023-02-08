@@ -8,12 +8,14 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
 import { SharedModule } from '../../../shared/shared.module';
 import { ProductsService } from '../../data-access/products.service';
 import { ProductsRoutingModule } from './products-routing.module';
+import { ProductSearchComponent } from '../product-search/product-search.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     ProductListComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    ProductSearchComponent
   ],
   imports: [
     CommonModule,
