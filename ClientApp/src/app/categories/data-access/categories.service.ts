@@ -29,13 +29,26 @@ export class CategoriesService extends ApiServiceBase {
     });
   }
 
-  // getCategoryListCount() {
-  //   return this.getListCount(this.apiUrl);
-  // }
+  getCategorySearch(pageNumber: number = 1) {
+    //TODO: query params
+    this.getListPage<CategoryListItem>(this.apiUrl + '/search', pageNumber)
+    .subscribe({
+      next: x => {
+        let newState = { ...this._state$.getValue(), CategorySearchList: x };
+        this._state$.next(newState);
+      }, 
+      error: err => console.log(err)
+    });
+  }
 
   getCategory(id: number) {
-    return this.getDetails<CategoryDetails>(this.apiUrl, id);
+    this.getDetails<CategoryDetails>(this.apiUrl, id)
+    .subscribe({
+      next: x => {
+        let newState = { ...this._state$.getValue(), SelectedCategory: x };
+        this._state$.next(newState);
+      }, 
+      error: err => console.log(err)
+    });
   }
 }
-
-
