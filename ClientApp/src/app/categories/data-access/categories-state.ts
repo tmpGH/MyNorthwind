@@ -6,13 +6,13 @@ export class CategoriesState {
   SelectedCategory: CategoryDetails;
 }
 
-export class CategoryDetails {
+export class CategoryListItem {
   categoryID: number = 0;
   categoryName: string = '';
   description?: string;
 }
 
-export class CategoryListItem {
+export class CategoryDetails {
   categoryID: number = 0;
   categoryName: string = '';
   description?: string;

@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ApiServiceBase } from '../../shared/data-access/api-service-base';
-import { RegionListItem } from './region-list-item';
-import { RegionDetails } from './region-details';
+import { RegionListItem, RegionDetails } from './regions-state';
 
 @Injectable()
 export class RegionsService extends ApiServiceBase {

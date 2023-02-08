@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { SupplierDetails } from '../../data-access/supplier-details';
+import { SupplierDetails } from '../../data-access/suppliers-state';
 import { SuppliersService } from '../../data-access/suppliers.service';
 
 @Component({

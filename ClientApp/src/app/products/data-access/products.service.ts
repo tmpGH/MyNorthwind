@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ApiServiceBase } from '../../shared/data-access/api-service-base';
-import { ProductDetails } from './product-details';
-import { ProductListItem } from './product-list-item';
+import { ProductListItem, ProductDetails } from './products-state';
 
 @Injectable()
 export class ProductsService extends ApiServiceBase {

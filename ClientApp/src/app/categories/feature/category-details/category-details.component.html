@@ -1,6 +1,6 @@
 <div *ngIf="state$ | async as data; else loading">
-  <h2>{{data.SelectedCategory?.categoryName}}</h2>
+  <h2>{{data.SelectedCategory.categoryName}}</h2>
 
-  <p>{{data.SelectedCategory?.description}}</p>
+  <p>{{data.SelectedCategory.description}}</p>
 </div>
 <ng-template #loading>Data loading...</ng-template>

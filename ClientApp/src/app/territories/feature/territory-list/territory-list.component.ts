@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ContextMenuItem } from 'src/app/shared/ui/list-context-menu/context-menu-item';
 import { ListContextMenuComponent } from 'src/app/shared/ui/list-context-menu/list-context-menu.component';
 import { TerritoriesService } from '../../data-access/territories.service';
-import { TerritoryListItem } from '../../data-access/territory-list-item';
+import { TerritoryListItem } from '../../data-access/territories-state';
 
 @Component({
   selector: 'app-territory-list',

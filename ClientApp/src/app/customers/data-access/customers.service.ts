@@ -2,8 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ApiServiceBase } from '../../shared/data-access/api-service-base';
-import { CustomerDetails } from './customer-details';
-import { CustomerListItem } from './customer-list-item';
+import { CustomerListItem, CustomerDetails } from './customers-state';
 
 @Injectable()
 export class CustomersService extends ApiServiceBase {

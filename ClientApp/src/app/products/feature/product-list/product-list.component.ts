@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ContextMenuItem } from 'src/app/shared/ui/list-context-menu/context-menu-item';
 import { ListContextMenuComponent } from 'src/app/shared/ui/list-context-menu/list-context-menu.component';
-import { ProductListItem } from '../../data-access/product-list-item';
+import { ProductListItem } from '../../data-access/products-state';
 import { ProductsService } from '../../data-access/products.service';
 
 @Component({

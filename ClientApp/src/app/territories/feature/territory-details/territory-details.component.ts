@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TerritoriesService } from '../../data-access/territories.service';
-import { TerritoryDetails } from '../../data-access/territory-details';
+import { TerritoryDetails } from '../../data-access/territories-state';
 
 @Component({
   selector: 'app-territory-details',
