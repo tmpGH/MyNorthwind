@@ -1,9 +1,9 @@
 export class TerritoriesState {
-  CategoryList: TerritoryDetails[] = [];
-  CategoryListCount: Number = 0;
-  CategorySearchList: TerritoryListItem[] = [];
-  CategorySearchListCount: Number = 0;
-  SelectedCategory: TerritoryDetails;
+  TerritoryList: TerritoryListItem[] = [];
+  TerritoryListCount: Number = 0;
+  TerritorySearchList: TerritoryListItem[] = [];
+  TerritorySearchListCount: Number = 0;
+  SelectedTerritory: TerritoryDetails | undefined;
 }
 
 export class TerritoryListItem {

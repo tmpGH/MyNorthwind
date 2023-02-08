@@ -1,6 +1,6 @@
 <div *ngIf="data$ | async as data; else loading">
-  <h2>{{data.companyName}}</h2>
+  <h2>{{data?.companyName}}</h2>
 
-  <p>{{data.phone}}</p>
+  <p>{{data?.phone}}</p>
 </div>
 <ng-template #loading>Data loading...</ng-template>

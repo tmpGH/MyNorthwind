@@ -1,14 +1,14 @@
 <div *ngIf="data$ | async as data; else loading">
-  <h2>{{data.orderID}}</h2>
+  <h2>{{data?.orderID}}</h2>
 
-  <p>{{data.orderDate}}</p>
-  <p>{{data.requiredDate}}</p>
-  <p>{{data.shippedDate}}</p>
-  <p>{{data.freight}}</p>
-  <p>{{data.shipName}}</p>
-  <p>{{data.shipAddress}}</p>
-  <p>{{data.shipCity}} {{data.shipPostalCode}}</p>
-  <p>{{data.shipRegion}}</p>
-  <p>{{data.shipCountry}}</p>
+  <p>{{data?.orderDate}}</p>
+  <p>{{data?.requiredDate}}</p>
+  <p>{{data?.shippedDate}}</p>
+  <p>{{data?.freight}}</p>
+  <p>{{data?.shipName}}</p>
+  <p>{{data?.shipAddress}}</p>
+  <p>{{data?.shipCity}} {{data?.shipPostalCode}}</p>
+  <p>{{data?.shipRegion}}</p>
+  <p>{{data?.shipCountry}}</p>
 </div>
 <ng-template #loading>Data loading...</ng-template>

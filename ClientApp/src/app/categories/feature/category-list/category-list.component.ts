@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ContextMenuItem } from 'src/app/shared/ui/list-context-menu/context-menu-item';
 import { ListContextMenuComponent } from 'src/app/shared/ui/list-context-menu/list-context-menu.component';
 import { CategoriesState, CategoryListItem } from '../../data-access/categories-state';
@@ -13,7 +13,7 @@ import { CategoriesService } from '../../data-access/categories.service';
 })
 export class CategoryListComponent implements OnInit {
 
-  state$: Observable<CategoriesState>;
+  items$: Observable<CategoryListItem[]>;
   pageNumber = 1;
   pageSize = 10;
 
@@ -34,7 +34,9 @@ export class CategoryListComponent implements OnInit {
   @ViewChild('contextMenu') contextmenu: ListContextMenuComponent;
 
   constructor(private dataService: CategoriesService, private router: Router, private route: ActivatedRoute) {
-    this.state$ = dataService.state$;
+    this.items$ = dataService.state$.pipe(
+      map(x => x.CategoryList)
+    );
   }
 
   ngOnInit(): void {

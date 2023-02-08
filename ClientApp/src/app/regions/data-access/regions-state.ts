@@ -1,9 +1,9 @@
 export class RegionsState {
-  CategoryList: RegionListItem[] = [];
-  CategoryListCount: Number = 0;
-  CategorySearchList: RegionListItem[] = [];
-  CategorySearchListCount: Number = 0;
-  SelectedCategory: RegionDetails;
+  RegionList: RegionListItem[] = [];
+  RegionListCount: Number = 0;
+  RegionSearchList: RegionListItem[] = [];
+  RegionSearchListCount: Number = 0;
+  SelectedRegion: RegionDetails |  undefined;
 }
 
 export class RegionListItem {

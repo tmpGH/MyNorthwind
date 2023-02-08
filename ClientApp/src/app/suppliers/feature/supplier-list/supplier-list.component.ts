@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ContextMenuItem } from 'src/app/shared/ui/list-context-menu/context-menu-item';
 import { ListContextMenuComponent } from 'src/app/shared/ui/list-context-menu/list-context-menu.component';
-import { SupplierListItem } from '../../data-access/suppliers-state';
+import { SupplierListItem, SuppliersState } from '../../data-access/suppliers-state';
 import { SuppliersService } from '../../data-access/suppliers.service';
 
 @Component({
@@ -14,10 +14,10 @@ import { SuppliersService } from '../../data-access/suppliers.service';
 export class SupplierListComponent implements OnInit {
 
   items$: Observable<SupplierListItem[]>;
-  selectedItem?: SupplierListItem;
   pageNumber = 1;
   pageSize = 10;
 
+  selectedItemId?: Number;
   contextMenuItems: ContextMenuItem[] = [{
     text: 'Show supplier details',
     action: () => this.showSupplier(),
@@ -33,7 +33,11 @@ export class SupplierListComponent implements OnInit {
   }];
   @ViewChild('contextMenu') contextmenu: ListContextMenuComponent;
   
-  constructor(private dataService: SuppliersService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private dataService: SuppliersService, private router: Router, private route: ActivatedRoute) {
+    this.items$ = dataService.state$.pipe(
+      map(x => x.SupplierList)
+    );
+  }
 
   ngOnInit(): void {
     this.refreshList();
@@ -41,16 +45,15 @@ export class SupplierListComponent implements OnInit {
 
   onRightClick(event: MouseEvent, item: SupplierListItem) { 
     event.preventDefault(); 
-    this.selectedItem = item;
+    this.selectedItemId = item.supplierID;
     this.contextmenu.open(event.clientX, event.clientY);
   }
 
   refreshList() {
-    this.items$ = this.dataService.getSupplierList();
+    this.dataService.getSupplierList();
   }
 
   showSupplier() {
-    let id = this.selectedItem?.supplierID;
-    this.router.navigate(['.', id], {relativeTo: this.route});
+    this.router.navigate(['.', this.selectedItemId], {relativeTo: this.route});
   }
 }

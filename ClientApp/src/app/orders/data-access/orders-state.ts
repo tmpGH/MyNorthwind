@@ -1,9 +1,9 @@
 export class OrdersState {
-  CategoryList: OrderListItem[] = [];
-  CategoryListCount: Number = 0;
-  CategorySearchList: OrderListItem[] = [];
-  CategorySearchListCount: Number = 0;
-  SelectedCategory: OrderDetails;
+  OrderList: OrderListItem[] = [];
+  OrderListCount: Number = 0;
+  OrderSearchList: OrderListItem[] = [];
+  OrderSearchListCount: Number = 0;
+  SelectedOrder: OrderDetails | undefined;
 }
 
 export class OrderListItem {

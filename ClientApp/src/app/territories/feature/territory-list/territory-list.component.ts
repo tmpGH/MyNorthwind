@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ContextMenuItem } from 'src/app/shared/ui/list-context-menu/context-menu-item';
 import { ListContextMenuComponent } from 'src/app/shared/ui/list-context-menu/list-context-menu.component';
 import { TerritoriesService } from '../../data-access/territories.service';
-import { TerritoryListItem } from '../../data-access/territories-state';
+import { TerritoriesState, TerritoryListItem } from '../../data-access/territories-state';
 
 @Component({
   selector: 'app-territory-list',
@@ -14,10 +14,10 @@ import { TerritoryListItem } from '../../data-access/territories-state';
 export class TerritoryListComponent implements OnInit {
 
   items$: Observable<TerritoryListItem[]>;
-  selectedItem?: TerritoryListItem;
   pageNumber = 1;
   pageSize = 10;
-  
+
+  selectedItemId?: string;
   contextMenuItems: ContextMenuItem[] = [{
     text: 'Show territory details',
     action: () => this.showTerritory(),
@@ -33,7 +33,11 @@ export class TerritoryListComponent implements OnInit {
   }];
   @ViewChild('contextMenu') contextmenu: ListContextMenuComponent;
   
-  constructor(private dataService: TerritoriesService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private dataService: TerritoriesService, private router: Router, private route: ActivatedRoute) {
+    this.items$ = dataService.state$.pipe(
+      map(x => x.TerritoryList)
+    );
+  }
 
   ngOnInit(): void {
     this.refreshList();
@@ -41,16 +45,15 @@ export class TerritoryListComponent implements OnInit {
   
   onRightClick(event: MouseEvent, item: TerritoryListItem) { 
     event.preventDefault(); 
-    this.selectedItem = item;
+    this.selectedItemId = item.territoryID;
     this.contextmenu.open(event.clientX, event.clientY);
   }
 
   refreshList() {
-    this.items$ = this.dataService.getTeritoryList();
+    this.dataService.getTerritoryList();
   }
 
   showTerritory() {
-    let id = this.selectedItem?.territoryID;
-    this.router.navigate(['.', id], {relativeTo: this.route});
+    this.router.navigate(['.', this.selectedItemId], {relativeTo: this.route});
   }  
 }

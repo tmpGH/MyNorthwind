@@ -1,9 +1,9 @@
 export class EmployeesState {
-  CategoryList: EmployeeListItem[] = [];
-  CategoryListCount: Number = 0;
-  CategorySearchList: EmployeeListItem[] = [];
-  CategorySearchListCount: Number = 0;
-  SelectedCategory: EmployeeDetails;
+  EmployeeList: EmployeeListItem[] = [];
+  EmployeeListCount: Number = 0;
+  EmployeeSearchList: EmployeeListItem[] = [];
+  EmployeeSearchListCount: Number = 0;
+  SelectedEmployee: EmployeeDetails | undefined;
 }
 
 export class EmployeeListItem {

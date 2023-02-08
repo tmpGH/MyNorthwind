@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ContextMenuItem } from 'src/app/shared/ui/list-context-menu/context-menu-item';
 import { ListContextMenuComponent } from 'src/app/shared/ui/list-context-menu/list-context-menu.component';
 import { CustomerListItem } from '../../data-access/customers-state';
@@ -14,10 +14,10 @@ import { CustomersService } from '../../data-access/customers.service';
 export class CustomerListComponent implements OnInit {
 
   items$: Observable<CustomerListItem[]>;
-  selectedItem?: CustomerListItem;
   pageNumber = 1;
   pageSize = 10;
   
+  selectedItemId?: string;
   contextMenuItems: ContextMenuItem[] = [{
     text: 'Show customer details',
     action: () => this.showCustomer(),
@@ -34,7 +34,11 @@ export class CustomerListComponent implements OnInit {
   }];
   @ViewChild('contextMenu') contextmenu: ListContextMenuComponent;
   
-  constructor(private dataService: CustomersService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private dataService: CustomersService, private router: Router, private route: ActivatedRoute) {
+    this.items$ = dataService.state$.pipe(
+      map(x => x.CustomerList)
+    )
+  }
 
   ngOnInit(): void {
     this.refreshList();
@@ -42,16 +46,15 @@ export class CustomerListComponent implements OnInit {
   
   onRightClick(event: MouseEvent, item: CustomerListItem) { 
     event.preventDefault(); 
-    this.selectedItem = item;
+    this.selectedItemId = item.customerID;
     this.contextmenu.open(event.clientX, event.clientY);
   }
 
   refreshList() {
-    this.items$ = this.dataService.getCustomerList();
+    this.dataService.getCustomerList();
   }
 
   showCustomer() {
-    let id = this.selectedItem?.customerID;
-    this.router.navigate(['.', id], {relativeTo: this.route});
+    this.router.navigate(['.', this.selectedItemId], {relativeTo: this.route});
   }  
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { CategoriesService } from '../../data-access/categories.service';
-import { CategoriesState } from '../../data-access/categories-state';
+import { CategoryDetails } from '../../data-access/categories-state';
 
 @Component({
   selector: 'app-category-details',
@@ -11,10 +11,12 @@ import { CategoriesState } from '../../data-access/categories-state';
 })
 export class CategoryDetailsComponent implements OnInit {
   
-  state$: Observable<CategoriesState>;
+  data$: Observable<CategoryDetails | undefined>;
 
   constructor(private dataService: CategoriesService, private route: ActivatedRoute) {
-    this.state$ = dataService.state$;
+    this.data$ = dataService.state$.pipe(
+      map(x => x.SelectedCategory)
+    );
   }
 
   ngOnInit(): void {

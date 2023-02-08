@@ -3,7 +3,7 @@ export class CategoriesState {
   CategoryListCount: Number = 0;
   CategorySearchList: CategoryListItem[] = [];
   CategorySearchListCount: Number = 0;
-  SelectedCategory: CategoryDetails;
+  SelectedCategory: CategoryDetails | undefined;
 }
 
 export class CategoryListItem {

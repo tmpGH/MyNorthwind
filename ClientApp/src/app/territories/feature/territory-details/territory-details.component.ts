@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { TerritoriesService } from '../../data-access/territories.service';
 import { TerritoryDetails } from '../../data-access/territories-state';
 
@@ -11,12 +11,16 @@ import { TerritoryDetails } from '../../data-access/territories-state';
 })
 export class TerritoryDetailsComponent implements OnInit {
 
-  data$: Observable<TerritoryDetails>;
+  data$: Observable<TerritoryDetails | undefined>;
   
-  constructor(private dataService: TerritoriesService, private route: ActivatedRoute) { }
+  constructor(private dataService: TerritoriesService, private route: ActivatedRoute) {
+    this.data$ = dataService.state$.pipe(
+      map(x => x.SelectedTerritory)
+    );
+  }
 
   ngOnInit(): void {
     let id = this.route.snapshot.params['id'];
-    this.data$ = this.dataService.getTeritory(id);
+    this.dataService.getTerritory(id);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ContextMenuItem } from 'src/app/shared/ui/list-context-menu/context-menu-item';
 import { ListContextMenuComponent } from 'src/app/shared/ui/list-context-menu/list-context-menu.component';
 import { ShipperListItem } from '../../data-access/shippers-state';
@@ -14,10 +14,10 @@ import { ShippersService } from '../../data-access/shippers.service';
 export class ShipperListComponent implements OnInit {
 
   items$: Observable<ShipperListItem[]>;
-  selectedItem?: ShipperListItem;
   pageNumber = 1;
   pageSize = 10;
 
+  selectedItemId?: Number;
   contextMenuItems: ContextMenuItem[] = [{
     text: 'Show shipper details',
     action: () => this.showShipper(),
@@ -33,7 +33,11 @@ export class ShipperListComponent implements OnInit {
   }];
   @ViewChild('contextMenu') contextmenu: ListContextMenuComponent;
     
-  constructor(private dataService: ShippersService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private dataService: ShippersService, private router: Router, private route: ActivatedRoute) {
+    this.items$ = dataService.state$.pipe(
+      map(x => x.ShipperList)
+    );
+  }
 
   ngOnInit(): void {
     this.refreshList();
@@ -41,16 +45,15 @@ export class ShipperListComponent implements OnInit {
 
   onRightClick(event: MouseEvent, item: ShipperListItem) { 
     event.preventDefault(); 
-    this.selectedItem = item;
+    this.selectedItemId = item.shipperID;
     this.contextmenu.open(event.clientX, event.clientY);
   }
   
   refreshList() {
-    this.items$ = this.dataService.getShipperList();
+    this.dataService.getShipperList();
   }
 
   showShipper() {
-    let id = this.selectedItem?.shipperID;
-    this.router.navigate(['.', id], {relativeTo: this.route});
+    this.router.navigate(['.', this.selectedItemId], {relativeTo: this.route});
   }  
 }

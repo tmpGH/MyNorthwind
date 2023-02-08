@@ -1,9 +1,9 @@
 export class ProductsState {
-  CategoryList: ProductListItem[] = [];
-  CategoryListCount: Number = 0;
-  CategorySearchList: ProductListItem[] = [];
-  CategorySearchListCount: Number = 0;
-  SelectedCategory: ProductDetails;
+  ProductList: ProductListItem[] = [];
+  ProductListCount: Number = 0;
+  ProductSearchList: ProductListItem[] = [];
+  ProductSearchListCount: Number = 0;
+  SelectedProduct: ProductDetails | undefined;
 }
 
 export class ProductListItem {

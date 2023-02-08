@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { ProductDetails } from '../../data-access/products-state';
+import { map, Observable } from 'rxjs';
+import { ProductDetails, ProductsState } from '../../data-access/products-state';
 import { ProductsService } from '../../data-access/products.service';
 
 @Component({
@@ -11,12 +11,16 @@ import { ProductsService } from '../../data-access/products.service';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  data$: Observable<ProductDetails>;
+  data$: Observable<ProductDetails | undefined>;
   
-  constructor(private dataService: ProductsService, private route: ActivatedRoute) { }
+  constructor(private dataService: ProductsService, private route: ActivatedRoute) {
+    this.data$ = dataService.state$.pipe(
+      map(x => x.SelectedProduct)
+    );
+  }
 
   ngOnInit(): void {
     let id = this.route.snapshot.params['id'];
-    this.data$ = this.dataService.getProduct(id);
+    this.dataService.getProduct(id);
   }
 }

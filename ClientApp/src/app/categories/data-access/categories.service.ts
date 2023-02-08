@@ -10,6 +10,7 @@ export class CategoriesService extends ApiServiceBase {
 
   private _state$: BehaviorSubject<CategoriesState>;
   state$: Observable<CategoriesState>;
+  
   private readonly apiUrl = environment.apiUrl + '/categories';
 
   constructor(http: HttpClient) {

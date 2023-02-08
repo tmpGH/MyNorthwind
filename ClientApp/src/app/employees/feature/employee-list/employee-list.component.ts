@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ContextMenuItem } from 'src/app/shared/ui/list-context-menu/context-menu-item';
 import { ListContextMenuComponent } from 'src/app/shared/ui/list-context-menu/list-context-menu.component';
 import { EmployeeListItem } from '../../data-access/employees-state';
@@ -14,10 +14,10 @@ import { EmployeesService } from '../../data-access/employees.service';
 export class EmployeeListComponent implements OnInit {
 
   items$: Observable<EmployeeListItem[]>;
-  selectedItem?: EmployeeListItem;  
   pageNumber = 1;
   pageSize = 10;
 
+  selectedItemId?: Number;
   contextMenuItems: ContextMenuItem[] = [{
     text: 'Show employee details',
     action: () => this.showEmployee(),
@@ -33,7 +33,11 @@ export class EmployeeListComponent implements OnInit {
   }];
   @ViewChild('contextMenu') contextmenu: ListContextMenuComponent;
 
-  constructor(private dataService: EmployeesService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private dataService: EmployeesService, private router: Router, private route: ActivatedRoute) {
+    this.items$ = dataService.state$.pipe(
+      map(x => x.EmployeeList)
+    )
+  }
 
   ngOnInit(): void {
     this.refreshList();
@@ -41,16 +45,15 @@ export class EmployeeListComponent implements OnInit {
 
   onRightClick(event: MouseEvent, item: EmployeeListItem) { 
     event.preventDefault(); 
-    this.selectedItem = item;
+    this.selectedItemId = item.employeeID;
     this.contextmenu.open(event.clientX, event.clientY);
   }
   
   refreshList() {
-    this.items$ = this.dataService.getEmployeeList();
+    this.dataService.getEmployeeList();
   }
 
   showEmployee() {
-    let id = this.selectedItem?.employeeID;
-    this.router.navigate(['.', id], {relativeTo: this.route});
+    this.router.navigate(['.', this.selectedItemId], {relativeTo: this.route});
   }
 }

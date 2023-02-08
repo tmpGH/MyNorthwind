@@ -1,9 +1,9 @@
 export class SuppliersState {
-  CategoryList: SupplierListItem[] = [];
-  CategoryListCount: Number = 0;
-  CategorySearchList: SupplierListItem[] = [];
-  CategorySearchListCount: Number = 0;
-  SelectedCategory: SupplierDetails;
+  SupplierList: SupplierListItem[] = [];
+  SupplierListCount: Number = 0;
+  SupplierSearchList: SupplierListItem[] = [];
+  SupplierSearchListCount: Number = 0;
+  SelectedSupplier: SupplierDetails | undefined;
 }
 
 export class SupplierListItem {

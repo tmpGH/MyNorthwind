@@ -1,9 +1,9 @@
 export class ShippersState {
-  CategoryList: ShipperListItem[] = [];
-  CategoryListCount: Number = 0;
-  CategorySearchList: ShipperListItem[] = [];
-  CategorySearchListCount: Number = 0;
-  SelectedCategory: ShipperDetails;
+  ShipperList: ShipperListItem[] = [];
+  ShipperListCount: Number = 0;
+  ShipperSearchList: ShipperListItem[] = [];
+  ShipperSearchListCount: Number = 0;
+  SelectedShipper: ShipperDetails | undefined;
 }
 
 export class ShipperListItem {

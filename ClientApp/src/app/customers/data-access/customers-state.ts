@@ -1,9 +1,9 @@
 export class CustomersState {
-  CategoryList: CustomerListItem[] = [];
-  CategoryListCount: Number = 0;
-  CategorySearchList: CustomerListItem[] = [];
-  CategorySearchListCount: Number = 0;
-  SelectedCategory: CustomerDetails;
+  CustomerList: CustomerListItem[] = [];
+  CustomerListCount: Number = 0;
+  CustomerSearchList: CustomerListItem[] = [];
+  CustomerSearchListCount: Number = 0;
+  SelectedCustomer: CustomerDetails | undefined;
 }
 
 export class CustomerListItem {

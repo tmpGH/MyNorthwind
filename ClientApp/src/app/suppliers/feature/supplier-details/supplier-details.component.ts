@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { SupplierDetails } from '../../data-access/suppliers-state';
 import { SuppliersService } from '../../data-access/suppliers.service';
 
@@ -11,12 +11,16 @@ import { SuppliersService } from '../../data-access/suppliers.service';
 })
 export class SupplierDetailsComponent implements OnInit {
 
-  data$: Observable<SupplierDetails>;
+  data$: Observable<SupplierDetails | undefined>;
   
-  constructor(private dataService: SuppliersService, private route: ActivatedRoute) { }
+  constructor(private dataService: SuppliersService, private route: ActivatedRoute) {
+    this.data$ = dataService.state$.pipe(
+      map(x => x.SelectedSupplier)
+    );
+  }
 
   ngOnInit(): void {
     let id = this.route.snapshot.params['id'];
-    this.data$ = this.dataService.getSupplier(id);
+    this.dataService.getSupplier(id);
   }
 }
