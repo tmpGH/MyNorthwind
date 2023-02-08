@@ -1,4 +1,4 @@
-export class TeritoryDetails {
+export class TerritoryDetails {
   territoryID: string = '';
   territoryDescription: string = '';
   // TODO: region

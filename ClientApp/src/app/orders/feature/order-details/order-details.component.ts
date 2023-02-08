@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { OrderDetails } from '../../data-access/order-details';
 import { OrdersService } from '../../data-access/orders.service';
 
@@ -10,12 +11,12 @@ import { OrdersService } from '../../data-access/orders.service';
 })
 export class OrderDetailsComponent implements OnInit {
 
-  data?: OrderDetails;
+  data$: Observable<OrderDetails>;
   
   constructor(private dataService: OrdersService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     let id = this.route.snapshot.params['id'];
-    this.dataService.getOrder(id).subscribe( value => this.data = value );
+    this.data$ = this.dataService.getOrder(id);
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { RegionDetails } from '../../data-access/region-details';
 import { RegionsService } from '../../data-access/regions.service';
 
@@ -10,12 +11,12 @@ import { RegionsService } from '../../data-access/regions.service';
 })
 export class RegionDetailsComponent implements OnInit {
 
-  data?: RegionDetails;
+  data$: Observable<RegionDetails>;
   
   constructor(private dataService: RegionsService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     let id = this.route.snapshot.params['id'];
-    this.dataService.getRegion(id).subscribe( value => this.data = value );
+    this.data$ = this.dataService.getRegion(id);
   }
 }

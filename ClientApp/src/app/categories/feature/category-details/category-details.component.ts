@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { CategoriesService } from '../../data-access/categories.service';
 import { CategoryDetails } from '../../data-access/category-details';
 
@@ -10,12 +11,12 @@ import { CategoryDetails } from '../../data-access/category-details';
 })
 export class CategoryDetailsComponent implements OnInit {
   
-  data?: CategoryDetails;
+  data$: Observable<CategoryDetails>;
 
   constructor(private dataService: CategoriesService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     let id = this.route.snapshot.params['id'];
-    this.dataService.getCategory(id).subscribe( value => this.data = value );
+    this.data$ = this.dataService.getCategory(id);
   }
 }

@@ -8,12 +8,14 @@ import { CategoryDetailsComponent } from '../category-details/category-details.c
 import { CategoriesService } from '../../data-access/categories.service';
 import { SharedModule } from '../../../shared/shared.module';
 import { CategoriesRoutingModule } from './categories-routing.module';
+import { CategorySearchComponent } from '../category-search/category-search.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     CategoryListComponent,
-    CategoryDetailsComponent
+    CategoryDetailsComponent,
+    CategorySearchComponent
   ],
   imports: [
     CommonModule,

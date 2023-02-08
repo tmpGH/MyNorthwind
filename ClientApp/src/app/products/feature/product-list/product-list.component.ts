@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ContextMenuItem } from 'src/app/shared/ui/list-context-menu/context-menu-item';
 import { ListContextMenuComponent } from 'src/app/shared/ui/list-context-menu/list-context-menu.component';
 import { ProductListItem } from '../../data-access/product-list-item';
@@ -12,7 +13,7 @@ import { ProductsService } from '../../data-access/products.service';
 })
 export class ProductListComponent implements OnInit {
 
-  items$: any;
+  items$: Observable<ProductListItem[]>;
   selectedItem?: ProductListItem;
   pageNumber = 1;
   pageSize = 10;

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CustomersService } from '../../data-access/customers.service';
+import { Observable } from 'rxjs';
 import { CustomerDetails } from '../../data-access/customer-details';
+import { CustomersService } from '../../data-access/customers.service';
 
 @Component({
   selector: 'app-customer-details',
@@ -10,12 +11,12 @@ import { CustomerDetails } from '../../data-access/customer-details';
 })
 export class CustomerDetailsComponent implements OnInit {
 
-  data?: CustomerDetails;
+  data$: Observable<CustomerDetails>;
 
   constructor(private dataService: CustomersService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     let id = this.route.snapshot.params['id'];
-    this.dataService.getCustomer(id).subscribe( value => this.data = value );
+    this.data$ = this.dataService.getCustomer(id);
   }
 }

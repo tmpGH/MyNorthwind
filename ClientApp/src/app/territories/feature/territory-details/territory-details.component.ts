@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { TerritoriesService } from '../../data-access/territories.service';
-import { TeritoryDetails } from '../../data-access/territory-details';
+import { TerritoryDetails } from '../../data-access/territory-details';
 
 @Component({
   selector: 'app-territory-details',
@@ -10,12 +11,12 @@ import { TeritoryDetails } from '../../data-access/territory-details';
 })
 export class TerritoryDetailsComponent implements OnInit {
 
-  data?: TeritoryDetails;
+  data$: Observable<TerritoryDetails>;
   
   constructor(private dataService: TerritoriesService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     let id = this.route.snapshot.params['id'];
-    this.dataService.getTeritory(id).subscribe( value => this.data = value );
+    this.data$ = this.dataService.getTeritory(id);
   }
 }
