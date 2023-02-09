@@ -1,19 +1,25 @@
 import { Event, NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 export abstract class MainComponentBase {
 
-  protected area: string = '';
   protected activeNavItem?: string;
+  protected menuSubscription?: Subscription;
 
   constructor(protected router: Router) { }
 
-  protected selectMenuItem() {
-    this.router.events.subscribe((event: Event) => {
+  protected setMenuItem() {
+    this.menuSubscription = this.router.events.subscribe((event: Event) => {
       if(event instanceof NavigationEnd) {
-        // TODO: change
         let items = event.url.split('/');
-        //console.log(items);
-        this.activeNavItem = ((items[1] == this.area) && items[2]) ? 'details' : 'list';
+        
+        if (!items[2]) {
+          this.activeNavItem = 'list';
+        } else if (items[2] == 'search') {
+          this.activeNavItem = 'search';
+        } else {
+          this.activeNavItem = 'details';
+        }
       }
     });
   }
