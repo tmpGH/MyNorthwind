@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { map } from 'rxjs';
+import { ListComponentBase } from 'src/app/shared/ui/list-component-base/list-component-base';
 import { ContextMenuItem } from 'src/app/shared/ui/list-context-menu/context-menu-item';
-import { ListContextMenuComponent } from 'src/app/shared/ui/list-context-menu/list-context-menu.component';
 import { CategoryListItem } from '../../data-access/categories-state';
 import { CategoriesService } from '../../data-access/categories.service';
 
@@ -11,16 +11,11 @@ import { CategoriesService } from '../../data-access/categories.service';
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.css'],
 })
-export class CategoryListComponent implements OnInit {
+export class CategoryListComponent extends ListComponentBase<CategoryListItem> implements OnInit {
 
-  items$: Observable<CategoryListItem[]>;
-  pageNumber = 1;
-  pageSize = 10;
-
-  selectedItemId?: Number;
   contextMenuItems: ContextMenuItem[] = [{
     text: 'Show category details',
-    action: () => this.showCategory(),
+    action: () => this.showItem('categories'),
     disabled: false,
     isSeparator: false
   }, {
@@ -31,9 +26,9 @@ export class CategoryListComponent implements OnInit {
     disabled: true,
     isSeparator: false
   }];
-  @ViewChild('contextMenu') contextmenu: ListContextMenuComponent;
 
-  constructor(private dataService: CategoriesService, private router: Router, private route: ActivatedRoute) {
+  constructor(private dataService: CategoriesService, protected override router: Router) {
+    super(router);
     this.items$ = dataService.state$.pipe(
       map(x => x.CategoryList)
     );
@@ -43,17 +38,7 @@ export class CategoryListComponent implements OnInit {
     this.refreshList();
   }
 
-  onRightClick(event: MouseEvent, item: CategoryListItem) { 
-    event.preventDefault(); 
-    this.selectedItemId = item.categoryID;
-    this.contextmenu.open(event.clientX, event.clientY);
-  }
-  
   refreshList() {
     this.dataService.getCategoryList();
-  }
-
-  showCategory() {
-    this.router.navigate(['.', this.selectedItemId], {relativeTo: this.route});
   }
 }

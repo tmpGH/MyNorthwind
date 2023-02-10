@@ -32,14 +32,14 @@ export class CategoriesService extends ApiServiceBase {
 
   getCategorySearch(pageNumber: number = 1) {
     //TODO: query params
-    this.getListPage<CategoryListItem>(this.apiUrl + '/search', pageNumber)
-    .subscribe({
-      next: x => {
-        let newState = { ...this._state$.getValue(), CategorySearchList: x };
-        this._state$.next(newState);
-      }, 
-      error: err => console.log(err)
-    });
+    // this.getListPage<CategoryListItem>(this.apiUrl + '/search', pageNumber)
+    // .subscribe({
+    //   next: x => {
+    //     let newState = { ...this._state$.getValue(), CategorySearchList: x };
+    //     this._state$.next(newState);
+    //   }, 
+    //   error: err => console.log(err)
+    // });
   }
 
   getCategory(id: number) {

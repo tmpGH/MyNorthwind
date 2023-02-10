@@ -14,7 +14,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr *ngFor="let item of items$ | async" (contextmenu)="onRightClick($event, item)">
+		<tr *ngFor="let item of items$ | async" (contextmenu)="onRightClick($event, item.employeeID)">
 			<td>{{ item.lastName }}</td>
 			<td>{{ item.firstName }}</td>
 			<td>{{ item.title }}</td>

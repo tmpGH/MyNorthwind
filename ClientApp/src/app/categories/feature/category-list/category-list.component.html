@@ -8,7 +8,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr *ngFor="let item of items$ | async" (contextmenu)="onRightClick($event, item)">
+		<tr *ngFor="let item of items$ | async" (contextmenu)="onRightClick($event, item.categoryID)">
 			<td>{{ item.categoryName }}</td>
 			<td>{{ item.description }}</td>
 		</tr>

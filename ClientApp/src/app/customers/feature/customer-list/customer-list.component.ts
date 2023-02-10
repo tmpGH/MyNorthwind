@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { map } from 'rxjs';
+import { ListComponentBase } from 'src/app/shared/ui/list-component-base/list-component-base';
 import { ContextMenuItem } from 'src/app/shared/ui/list-context-menu/context-menu-item';
-import { ListContextMenuComponent } from 'src/app/shared/ui/list-context-menu/list-context-menu.component';
 import { CustomerListItem } from '../../data-access/customers-state';
 import { CustomersService } from '../../data-access/customers.service';
 
@@ -11,16 +11,11 @@ import { CustomersService } from '../../data-access/customers.service';
   templateUrl: './customer-list.component.html',
   styleUrls: ['./customer-list.component.css']
 })
-export class CustomerListComponent implements OnInit {
+export class CustomerListComponent extends ListComponentBase<CustomerListItem> implements OnInit {
 
-  items$: Observable<CustomerListItem[]>;
-  pageNumber = 1;
-  pageSize = 10;
-  
-  selectedItemId?: string;
   contextMenuItems: ContextMenuItem[] = [{
     text: 'Show customer details',
-    action: () => this.showCustomer(),
+    action: () => this.showItem('customers'),
     disabled: false,
     isSeparator: false
 
@@ -29,12 +24,12 @@ export class CustomerListComponent implements OnInit {
     isSeparator: true
   }, {
     text: 'Another action',
-    disabled: false,
+    disabled: true,
     isSeparator: false
   }];
-  @ViewChild('contextMenu') contextmenu: ListContextMenuComponent;
   
-  constructor(private dataService: CustomersService, private router: Router, private route: ActivatedRoute) {
+  constructor(private dataService: CustomersService, protected override router: Router) {
+    super(router);
     this.items$ = dataService.state$.pipe(
       map(x => x.CustomerList)
     )
@@ -44,17 +39,7 @@ export class CustomerListComponent implements OnInit {
     this.refreshList();
   }
   
-  onRightClick(event: MouseEvent, item: CustomerListItem) { 
-    event.preventDefault(); 
-    this.selectedItemId = item.customerID;
-    this.contextmenu.open(event.clientX, event.clientY);
-  }
-
   refreshList() {
     this.dataService.getCustomerList();
   }
-
-  showCustomer() {
-    this.router.navigate(['.', this.selectedItemId], {relativeTo: this.route});
-  }  
 }

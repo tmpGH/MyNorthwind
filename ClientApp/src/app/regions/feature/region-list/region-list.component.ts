@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { map } from 'rxjs';
+import { ListComponentBase } from 'src/app/shared/ui/list-component-base/list-component-base';
 import { ContextMenuItem } from 'src/app/shared/ui/list-context-menu/context-menu-item';
-import { ListContextMenuComponent } from 'src/app/shared/ui/list-context-menu/list-context-menu.component';
 import { RegionListItem } from '../../data-access/regions-state';
 import { RegionsService } from '../../data-access/regions.service';
 
@@ -11,16 +11,11 @@ import { RegionsService } from '../../data-access/regions.service';
   templateUrl: './region-list.component.html',
   styleUrls: ['./region-list.component.css']
 })
-export class RegionListComponent implements OnInit {
+export class RegionListComponent extends ListComponentBase<RegionListItem> implements OnInit {
 
-  items$: Observable<RegionListItem[]>;
-  pageNumber = 1;
-  pageSize = 10;
-  
-  selectedItemId?: Number;
   contextMenuItems: ContextMenuItem[] = [{
     text: 'Show region details',
-    action: () => this.showRegion(),
+    action: () => this.showItem('regions'),
     disabled: false,
     isSeparator: false
   }, {
@@ -31,9 +26,9 @@ export class RegionListComponent implements OnInit {
     disabled: false,
     isSeparator: false
   }];
-  @ViewChild('contextMenu') contextmenu: ListContextMenuComponent;
 
-  constructor(private dataService: RegionsService, private router: Router, private route: ActivatedRoute) {
+  constructor(private dataService: RegionsService, protected override router: Router) {
+    super(router);
     this.items$ = dataService.state$.pipe(
       map(x => x.RegionList)
     );
@@ -43,17 +38,7 @@ export class RegionListComponent implements OnInit {
     this.refreshList();
   }
 
-  onRightClick(event: MouseEvent, item: RegionListItem) { 
-    event.preventDefault(); 
-    this.selectedItemId = item.regionID;
-    this.contextmenu.open(event.clientX, event.clientY);
-  }
-
   refreshList() {
     this.dataService.getRegionList();
   }
-
-  showRegion() {
-    this.router.navigate(['.', this.selectedItemId], {relativeTo: this.route});
-  }  
 }

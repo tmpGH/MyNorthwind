@@ -10,7 +10,7 @@ import { ContextMenuItem } from './context-menu-item';
 export class ListContextMenuComponent {
 
   @Input('menuItems') menuItems: ContextMenuItem[] = [];
-  @ViewChild('dropdownMenu') dropdownmenu!: NgbDropdown;
+  @ViewChild('dropdownMenu') dropdownmenu: NgbDropdown;
   menuPosition =  {left: '0px', top: '0px'}
   
   constructor() { }

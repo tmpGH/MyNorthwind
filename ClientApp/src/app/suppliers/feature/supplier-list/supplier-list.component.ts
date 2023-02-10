@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { map } from 'rxjs';
+import { ListComponentBase } from 'src/app/shared/ui/list-component-base/list-component-base';
 import { ContextMenuItem } from 'src/app/shared/ui/list-context-menu/context-menu-item';
-import { ListContextMenuComponent } from 'src/app/shared/ui/list-context-menu/list-context-menu.component';
-import { SupplierListItem, SuppliersState } from '../../data-access/suppliers-state';
+import { SupplierListItem } from '../../data-access/suppliers-state';
 import { SuppliersService } from '../../data-access/suppliers.service';
 
 @Component({
@@ -11,16 +11,11 @@ import { SuppliersService } from '../../data-access/suppliers.service';
   templateUrl: './supplier-list.component.html',
   styleUrls: ['./supplier-list.component.css']
 })
-export class SupplierListComponent implements OnInit {
+export class SupplierListComponent extends ListComponentBase<SupplierListItem> implements OnInit {
 
-  items$: Observable<SupplierListItem[]>;
-  pageNumber = 1;
-  pageSize = 10;
-
-  selectedItemId?: Number;
   contextMenuItems: ContextMenuItem[] = [{
     text: 'Show supplier details',
-    action: () => this.showSupplier(),
+    action: () => this.showItem('suppliers'),
     disabled: false,
     isSeparator: false
   }, {
@@ -31,9 +26,9 @@ export class SupplierListComponent implements OnInit {
     disabled: false,
     isSeparator: false
   }];
-  @ViewChild('contextMenu') contextmenu: ListContextMenuComponent;
   
-  constructor(private dataService: SuppliersService, private router: Router, private route: ActivatedRoute) {
+  constructor(private dataService: SuppliersService, protected override router: Router) {
+    super(router);
     this.items$ = dataService.state$.pipe(
       map(x => x.SupplierList)
     );
@@ -43,17 +38,7 @@ export class SupplierListComponent implements OnInit {
     this.refreshList();
   }
 
-  onRightClick(event: MouseEvent, item: SupplierListItem) { 
-    event.preventDefault(); 
-    this.selectedItemId = item.supplierID;
-    this.contextmenu.open(event.clientX, event.clientY);
-  }
-
   refreshList() {
     this.dataService.getSupplierList();
-  }
-
-  showSupplier() {
-    this.router.navigate(['.', this.selectedItemId], {relativeTo: this.route});
   }
 }
