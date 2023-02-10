@@ -13,19 +13,7 @@ import { SuppliersService } from '../../data-access/suppliers.service';
 })
 export class SupplierListComponent extends ListComponentBase<SupplierListItem> implements OnInit {
 
-  contextMenuItems: ContextMenuItem[] = [{
-    text: 'Show supplier details',
-    action: () => this.showItem('suppliers'),
-    disabled: false,
-    isSeparator: false
-  }, {
-    disabled: false,
-    isSeparator: true
-  }, {
-    text: 'Another action',
-    disabled: false,
-    isSeparator: false
-  }];
+  contextMenuItems: ContextMenuItem[] = [];
   
   constructor(private dataService: SuppliersService, protected override router: Router) {
     super(router);
@@ -35,10 +23,27 @@ export class SupplierListComponent extends ListComponentBase<SupplierListItem> i
   }
 
   ngOnInit(): void {
+    this.setContextMenu();
     this.refreshList();
   }
 
   refreshList() {
     this.dataService.getSupplierList();
+  }
+
+  setContextMenu() {
+    this.contextMenuItems = [{
+      text: 'Show supplier details',
+      action: () => this.showItem('suppliers'),
+      disabled: false,
+      isSeparator: false
+    }, {
+      disabled: false,
+      isSeparator: true
+    }, {
+      text: 'Another action',
+      disabled: false,
+      isSeparator: false
+    }];
   }
 }

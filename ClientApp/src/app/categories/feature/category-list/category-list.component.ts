@@ -13,19 +13,7 @@ import { CategoriesService } from '../../data-access/categories.service';
 })
 export class CategoryListComponent extends ListComponentBase<CategoryListItem> implements OnInit {
 
-  contextMenuItems: ContextMenuItem[] = [{
-    text: 'Show category details',
-    action: () => this.showItem('categories'),
-    disabled: false,
-    isSeparator: false
-  }, {
-    disabled: false,
-    isSeparator: true
-  }, {
-    text: 'Another action',
-    disabled: true,
-    isSeparator: false
-  }];
+  contextMenuItems: ContextMenuItem[] = [];
 
   constructor(private dataService: CategoriesService, protected override router: Router) {
     super(router);
@@ -35,10 +23,27 @@ export class CategoryListComponent extends ListComponentBase<CategoryListItem> i
   }
 
   ngOnInit(): void {
+    this.setContextMenu();
     this.refreshList();
   }
 
   refreshList() {
     this.dataService.getCategoryList();
+  }
+
+  setContextMenu() {
+    this.contextMenuItems = [{
+      text: 'Show category details',
+      action: () => this.showItem('categories'),
+      disabled: false,
+      isSeparator: false
+    }, {
+      disabled: false,
+      isSeparator: true
+    }, {
+      text: 'Another action',
+      disabled: true,
+      isSeparator: false
+    }];
   }
 }

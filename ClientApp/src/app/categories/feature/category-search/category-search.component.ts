@@ -16,19 +16,7 @@ export class CategorySearchComponent extends ListComponentBase<CategoryListItem>
   nameTextSearch: string = '';
   descriptionTextSearch: string = '';
 
-  contextMenuItems: ContextMenuItem[] = [{
-    text: 'Show category details',
-    action: () => this.showItem('categories'),
-    disabled: false,
-    isSeparator: false
-  }, {
-    disabled: false,
-    isSeparator: true
-  }, {
-    text: 'Another action',
-    disabled: true,
-    isSeparator: false
-  }];
+  contextMenuItems: ContextMenuItem[] = [];
   
   constructor(private dataService: CategoriesService, protected override router: Router) {
     super(router);
@@ -38,6 +26,7 @@ export class CategorySearchComponent extends ListComponentBase<CategoryListItem>
   }
 
   ngOnInit(): void {
+    this.setContextMenu();
     this.refreshList();
   }
   
@@ -48,4 +37,20 @@ export class CategorySearchComponent extends ListComponentBase<CategoryListItem>
   getValue(event: Event): string {
     return (event.target as HTMLInputElement).value;
   }
+
+  setContextMenu() {
+    this.contextMenuItems = [{
+      text: 'Show category details',
+      action: () => this.showItem('categories'),
+      disabled: false,
+      isSeparator: false
+    }, {
+      disabled: false,
+      isSeparator: true
+    }, {
+      text: 'Another action',
+      disabled: true,
+      isSeparator: false
+    }];
+  }  
 }

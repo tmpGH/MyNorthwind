@@ -13,19 +13,7 @@ import { RegionsService } from '../../data-access/regions.service';
 })
 export class RegionListComponent extends ListComponentBase<RegionListItem> implements OnInit {
 
-  contextMenuItems: ContextMenuItem[] = [{
-    text: 'Show region details',
-    action: () => this.showItem('regions'),
-    disabled: false,
-    isSeparator: false
-  }, {
-    disabled: false,
-    isSeparator: true
-  }, {
-    text: 'Another action',
-    disabled: false,
-    isSeparator: false
-  }];
+  contextMenuItems: ContextMenuItem[] = [];
 
   constructor(private dataService: RegionsService, protected override router: Router) {
     super(router);
@@ -35,10 +23,27 @@ export class RegionListComponent extends ListComponentBase<RegionListItem> imple
   }
 
   ngOnInit(): void {
+    this.setContextMenu();
     this.refreshList();
   }
 
   refreshList() {
     this.dataService.getRegionList();
   }
+
+  setContextMenu() {
+    this.contextMenuItems = [{
+      text: 'Show region details',
+      action: () => this.showItem('regions'),
+      disabled: false,
+      isSeparator: false
+    }, {
+      disabled: false,
+      isSeparator: true
+    }, {
+      text: 'Another action',
+      disabled: false,
+      isSeparator: false
+    }];
+  }  
 }

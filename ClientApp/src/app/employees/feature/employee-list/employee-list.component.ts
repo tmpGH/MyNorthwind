@@ -13,19 +13,7 @@ import { EmployeesService } from '../../data-access/employees.service';
 })
 export class EmployeeListComponent extends ListComponentBase<EmployeeListItem> implements OnInit {
 
-  contextMenuItems: ContextMenuItem[] = [{
-    text: 'Show employee details',
-    action: () => this.showItem('employees'),
-    disabled: false,
-    isSeparator: false
-  }, {
-    disabled: false,
-    isSeparator: true
-  }, {
-    text: 'Another action',
-    disabled: true,
-    isSeparator: false
-  }];
+  contextMenuItems: ContextMenuItem[] = [];
 
   constructor(private dataService: EmployeesService, protected override router: Router) {
     super(router);
@@ -35,10 +23,27 @@ export class EmployeeListComponent extends ListComponentBase<EmployeeListItem> i
   }
 
   ngOnInit(): void {
+    this.setContextMenu();
     this.refreshList();
   }
 
   refreshList() {
     this.dataService.getEmployeeList();
   }
+
+  setContextMenu() {
+    this.contextMenuItems = [{
+      text: 'Show employee details',
+      action: () => this.showItem('employees'),
+      disabled: false,
+      isSeparator: false
+    }, {
+      disabled: false,
+      isSeparator: true
+    }, {
+      text: 'Another action',
+      disabled: true,
+      isSeparator: false
+    }];
+  }  
 }

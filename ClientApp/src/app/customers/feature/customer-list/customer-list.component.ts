@@ -13,20 +13,7 @@ import { CustomersService } from '../../data-access/customers.service';
 })
 export class CustomerListComponent extends ListComponentBase<CustomerListItem> implements OnInit {
 
-  contextMenuItems: ContextMenuItem[] = [{
-    text: 'Show customer details',
-    action: () => this.showItem('customers'),
-    disabled: false,
-    isSeparator: false
-
-  }, {
-    disabled: false,
-    isSeparator: true
-  }, {
-    text: 'Another action',
-    disabled: true,
-    isSeparator: false
-  }];
+  contextMenuItems: ContextMenuItem[] = [];
   
   constructor(private dataService: CustomersService, protected override router: Router) {
     super(router);
@@ -36,10 +23,28 @@ export class CustomerListComponent extends ListComponentBase<CustomerListItem> i
   }
 
   ngOnInit(): void {
+    this.setContextMenu();
     this.refreshList();
   }
   
   refreshList() {
     this.dataService.getCustomerList();
   }
+
+  setContextMenu() {
+    this.contextMenuItems = [{
+      text: 'Show customer details',
+      action: () => this.showItem('customers'),
+      disabled: false,
+      isSeparator: false
+  
+    }, {
+      disabled: false,
+      isSeparator: true
+    }, {
+      text: 'Another action',
+      disabled: true,
+      isSeparator: false
+    }];
+  }  
 }

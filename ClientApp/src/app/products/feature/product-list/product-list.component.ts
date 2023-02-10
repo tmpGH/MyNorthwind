@@ -13,19 +13,7 @@ import { ProductsService } from '../../data-access/products.service';
 })
 export class ProductListComponent extends ListComponentBase<ProductListItem>  implements OnInit {
 
-  contextMenuItems: ContextMenuItem[] = [{
-    text: 'Show product details',
-    action: () => this.showItem('products'),
-    disabled: false,
-    isSeparator: false
-  }, {
-    disabled: false,
-    isSeparator: true
-  }, {
-    text: 'Another action',
-    disabled: false,
-    isSeparator: false
-  }];
+  contextMenuItems: ContextMenuItem[] = [];
   
   constructor(private dataService: ProductsService, protected override router: Router) {
     super(router);
@@ -35,10 +23,27 @@ export class ProductListComponent extends ListComponentBase<ProductListItem>  im
   }
 
   ngOnInit(): void {
+    this.setContextMenu();
     this.refreshList();
   }
 
   refreshList() {
     this.dataService.getProductList();
   }
+
+  setContextMenu() {
+    this.contextMenuItems = [{
+      text: 'Show product details',
+      action: () => this.showItem('products'),
+      disabled: false,
+      isSeparator: false
+    }, {
+      disabled: false,
+      isSeparator: true
+    }, {
+      text: 'Another action',
+      disabled: false,
+      isSeparator: false
+    }];
+  }  
 }

@@ -13,19 +13,7 @@ import { OrdersService } from '../../data-access/orders.service';
 })
 export class OrderListComponent extends ListComponentBase<OrderListItem> implements OnInit {
 
-  contextMenuItems: ContextMenuItem[] = [{
-    text: 'Show order details',
-    action: () => this.showItem('orders'),
-    disabled: false,
-    isSeparator: false
-  }, {
-    disabled: false,
-    isSeparator: true
-  }, {
-    text: 'Another action',
-    disabled: true,
-    isSeparator: false
-  }];
+  contextMenuItems: ContextMenuItem[] = [];
     
   constructor(private dataService: OrdersService, protected override router: Router) {
     super(router);
@@ -35,10 +23,27 @@ export class OrderListComponent extends ListComponentBase<OrderListItem> impleme
   }
 
   ngOnInit(): void {
+    this.setContextMenu();    
     this.refreshList();
   }
 
   refreshList() {
     this.dataService.getOrderList();
   }
+
+  setContextMenu() {
+    this.contextMenuItems = [{
+      text: 'Show order details',
+      action: () => this.showItem('orders'),
+      disabled: false,
+      isSeparator: false
+    }, {
+      disabled: false,
+      isSeparator: true
+    }, {
+      text: 'Another action',
+      disabled: true,
+      isSeparator: false
+    }];
+  }  
 }

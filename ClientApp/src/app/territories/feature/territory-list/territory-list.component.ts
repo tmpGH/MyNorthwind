@@ -13,19 +13,7 @@ import { ListComponentBase } from 'src/app/shared/ui/list-component-base/list-co
 })
 export class TerritoryListComponent extends ListComponentBase<TerritoryListItem> implements OnInit {
 
-  contextMenuItems: ContextMenuItem[] = [{
-    text: 'Show territory details',
-    action: () => this.showItem('territories'),
-    disabled: false,
-    isSeparator: false
-  }, {
-    disabled: false,
-    isSeparator: true
-  }, {
-    text: 'Another action',
-    disabled: false,
-    isSeparator: false
-  }];
+  contextMenuItems: ContextMenuItem[] = [];
   
   constructor(private dataService: TerritoriesService, protected override router: Router) {
     super(router);
@@ -35,10 +23,27 @@ export class TerritoryListComponent extends ListComponentBase<TerritoryListItem>
   }
 
   ngOnInit(): void {
+    this.setContextMenu();
     this.refreshList();
   }
   
   refreshList() {
     this.dataService.getTerritoryList();
   }
+
+  setContextMenu() {
+    this.contextMenuItems = [{
+      text: 'Show territory details',
+      action: () => this.showItem('territories'),
+      disabled: false,
+      isSeparator: false
+    }, {
+      disabled: false,
+      isSeparator: true
+    }, {
+      text: 'Another action',
+      disabled: false,
+      isSeparator: false
+    }];
+  }  
 }
