@@ -37,6 +37,28 @@ namespace WebApi.Controllers
             return result;
         }
 
+        // GET: api/<EmployeesController>/search
+        [HttpGet("search")]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<List<EmployeeItemDto>>> Search(int? pageNumber,
+            string lastName, string firstName, string title, string address, string city, string region, string postalCode, string country)
+        {
+            var request = new GetSearchEmployeesQuery
+            {
+                PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,
+                ItemsOnPage = this.ItemsOnPage,
+                LastName = lastName?.Trim(),
+                FirstName = firstName?.Trim(),
+                Title = title?.Trim(),
+                Address = address?.Trim(),
+                City = city?.Trim(),
+                Region = region?.Trim(),
+                PostalCode = postalCode?.Trim(),
+                Country = country?.Trim()
+            };
+            return await Mediator.Send(request);
+        }
+
         // POST api/<EmployeesController>
         [HttpPost]
         public void Post([FromBody] string value)

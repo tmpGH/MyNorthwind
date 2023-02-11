@@ -41,7 +41,8 @@ namespace WebApi.Controllers
         // GET api/<CategoriesController>/search
         [HttpGet("search")]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult<List<CategoryItemDto>>> Search(int? pageNumber, string name, string description)
+        public async Task<ActionResult<List<CategoryItemDto>>> Search(int? pageNumber,
+            string name, string description)
         {
             if (string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(description))
             {

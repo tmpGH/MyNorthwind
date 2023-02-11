@@ -37,6 +37,22 @@ namespace WebApi.Controllers
             return result;
         }
 
+        // GET: api/<ShippersController>/search
+        [HttpGet("search")]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<List<ShipperItemDto>>> Search(int? pageNumber,
+            string name, string phone)
+        {
+            var request = new GetSearchShippersQuery
+            {
+                PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,
+                ItemsOnPage = this.ItemsOnPage,
+                CompanyName = name?.Trim(),
+                Phone = phone?.Trim(),
+            };
+            return await Mediator.Send(request);
+        }
+
         // POST api/<ShippersController>
         [HttpPost]
         public void Post([FromBody] string value)

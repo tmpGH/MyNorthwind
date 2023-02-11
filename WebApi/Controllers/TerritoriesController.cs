@@ -37,6 +37,21 @@ namespace WebApi.Controllers
             return result;
         }
 
+        // GET: api/<TerritoriesController>/search
+        [HttpGet("search")]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<List<TerritoryItemDto>>> Search(int? pageNumber,
+            string description)
+        {
+            var request = new GetSearchTerritoriesQuery
+            {
+                PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,
+                ItemsOnPage = this.ItemsOnPage,
+                TerritoryDescription = description?.Trim()
+            };
+            return await Mediator.Send(request);
+        }
+
         // POST api/<TerritoriesController>
         [HttpPost]
         public void Post([FromBody] string value)

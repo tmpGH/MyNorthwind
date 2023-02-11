@@ -37,6 +37,21 @@ namespace WebApi.Controllers
             return result;
         }
 
+        // GET: api/<RegionsController>/search
+        [HttpGet("search")]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<List<RegionItemDto>>> Search(int? pageNumber,
+            string description)
+        {
+            var request = new GetSearchRegionsQuery
+            {
+                PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,
+                ItemsOnPage = this.ItemsOnPage,
+                RegionDescription = description?.Trim()
+            };
+            return await Mediator.Send(request);
+        }
+
         // POST api/<RegionsController>
         [HttpPost]
         public void Post([FromBody] string value)

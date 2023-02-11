@@ -37,6 +37,26 @@ namespace WebApi.Controllers
             return result;
         }
 
+        // GET: api/<SuppliersController>/search
+        [HttpGet("search")]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<List<SupplierItemDto>>> Search(int? pageNumber,
+            string name, string address, string city, string region, string postalCode, string country)
+        {
+            var request = new GetSearchSuppliersQuery
+            {
+                PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,
+                ItemsOnPage = this.ItemsOnPage,
+                CompanyName = name?.Trim(),
+                Address = address?.Trim(),
+                City = city?.Trim(),
+                Region = region?.Trim(),
+                PostalCode = postalCode?.Trim(),
+                Country = country?.Trim()
+            };
+            return await Mediator.Send(request);
+        }
+
         // POST api/<SuppliersController>
         [HttpPost]
         public void Post([FromBody] string value)

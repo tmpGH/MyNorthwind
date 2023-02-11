@@ -37,6 +37,22 @@ namespace WebApi.Controllers
             return result;
         }
 
+        // GET: api/<ProductsController>/search
+        [HttpGet("search")]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<List<ProductItemDto>>> Search(int? pageNumber,
+            string name, decimal? unitPrice)
+        {
+            var request = new GetSearchProductsQuery
+            {
+                PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,
+                ItemsOnPage = this.ItemsOnPage,
+                ProductName = name?.Trim(),
+                UnitPrice = unitPrice
+            };
+            return await Mediator.Send(request);
+        }
+
         // POST api/<ProductsController>
         [HttpPost]
         public void Post([FromBody] string value)

@@ -1,6 +1,7 @@
 ﻿using Application.Orders.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -35,6 +36,23 @@ namespace WebApi.Controllers
                 return NotFound();
             }
             return result;
+        }
+
+        // GET: api/<OrdersController>/search
+        [HttpGet("search")]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<List<OrderItemDto>>> Search(int? pageNumber,
+            DateTime? ordered, DateTime? required, DateTime? shipped)
+        {
+            var request = new GetSearchOrdersQuery
+            {
+                PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,
+                ItemsOnPage = this.ItemsOnPage,
+                OrderDate = ordered,
+                RequiredDate = required,
+                ShippedDate = shipped
+            };
+            return await Mediator.Send(request);
         }
 
         // POST api/<OrdersController>
