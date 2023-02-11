@@ -4,8 +4,9 @@
 			<label for="description">Description</label>
 			<input id="description" class="form-control" [value]="description" (input)="description=getValue($event)">
 		</div>
-		<div class="form-group col">
-		</div>
+		<div class="form-group col"></div>
+		<div class="form-group col"></div>
+		<div class="form-group col"></div>
   </div>
 	<p></p>
   <button type="button" class="btn btn-secondary" (click)="0">Search</button>
@@ -13,4 +14,26 @@
 
 <hr/>
 
-<p>region-search under construction!</p>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let item of items$ | async" (contextmenu)="onRightClick($event, item.regionID)">
+			<td>{{ item.regionDescription }}</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="d-flex justify-content-between p-2">
+	<ngb-pagination [collectionSize]="pageSize"
+    [(page)]="pageNumber"
+    [pageSize]="pageSize"
+		(pageChange)="refreshList()"
+	>
+	</ngb-pagination>
+</div>
+
+<app-list-context-menu #contextMenu [menuItems]="contextMenuItems"></app-list-context-menu>

@@ -44,5 +44,5 @@ export class CategorySearchComponent extends ListComponentBase<CategoryListItem>
       disabled: false,
       isSeparator: false
     }];
-  }  
+  }
 }

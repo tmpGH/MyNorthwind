@@ -1,3 +1,5 @@
+<p><b>UNDER CONSTRUCTION</b></p>
+
 <form>
 	<div class="row">
 		<div class="form-group col">
@@ -12,6 +14,7 @@
 			<label for="shipped">Shipped</label>
 			<input id="shipped" class="form-control" [value]="shipped" (input)="shipped=getValue($event)">
 		</div>
+		<div class="form-group col"></div>
   </div>
 	<p></p>
   <button type="button" class="btn btn-secondary" (click)="0">Search</button>
@@ -19,4 +22,30 @@
 
 <hr/>
 
-<p>order-search under construction!</p>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">Ordered</th>
+			<th scope="col">Required</th>
+			<th scope="col">Shipped</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let item of items$ | async" (contextmenu)="onRightClick($event, item.orderID)">
+			<td>{{ item.orderDate }}</td>
+			<td>{{ item.requiredDate }}</td>
+			<td>{{ item.shippedDate }}</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="d-flex justify-content-between p-2">
+	<ngb-pagination [collectionSize]="pageSize"
+    [(page)]="pageNumber"
+    [pageSize]="pageSize"
+		(pageChange)="refreshList()"
+	>
+	</ngb-pagination>
+</div>
+
+<app-list-context-menu #contextMenu [menuItems]="contextMenuItems"></app-list-context-menu>

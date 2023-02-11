@@ -1,6 +1,6 @@
 <div class="d-flex">
 	<ul ngbNav #nav="ngbNav" [(activeId)]="activeNavItem" class="nav-pills m-1" orientation="vertical">
-		<li ngbNavItem="list" >
+		<li ngbNavItem="list">
 			<a ngbNavLink routerLink="./">Category list</a>
 			<ng-template ngbNavContent>
         <router-outlet></router-outlet>
@@ -19,6 +19,6 @@
 			</ng-template>
 		</li>
 	</ul>
-  <div class="vr"></div>
-	<div [ngbNavOutlet]="nav" class="m-3 mt-1 col-md"></div>
+  <div class="vr" ></div>
+	<div [ngbNavOutlet]="nav" class="m-3 mt-1 col-sm"></div>
 </div>
