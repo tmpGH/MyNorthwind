@@ -12,6 +12,7 @@ namespace WebApi.Controllers
     {
         // GET: api/<CategoriesController>
         [HttpGet]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<List<CategoryItemDto>>> Get(int? pageNumber)
         {
             var request = new GetCategoriesQuery
@@ -24,8 +25,8 @@ namespace WebApi.Controllers
 
         // GET api/<CategoriesController>/5
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<CategoryDto>> Get(int id)
         {
             var request = new GetCategoryQuery { Id = id };
@@ -35,6 +36,26 @@ namespace WebApi.Controllers
                 return NotFound();
             }
             return result;
+        }
+
+        // GET api/<CategoriesController>/search
+        [HttpGet("search")]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<List<CategoryItemDto>>> Search(int? pageNumber, string name, string description)
+        {
+            if (string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(description))
+            {
+                return new List<CategoryItemDto>();
+            }
+
+            var request = new GetSearchCategoriesQuery
+            {
+                PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,
+                ItemsOnPage = this.ItemsOnPage,
+                CategoryName = name?.Trim(),
+                Description = description?.Trim()
+            };
+            return await Mediator.Send(request);
         }
 
         // POST api/<CategoriesController>

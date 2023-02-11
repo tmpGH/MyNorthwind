@@ -12,7 +12,7 @@ namespace WebApi.Controllers
     {
         // GET: api/<CustomersController>
         [HttpGet]
-        public async Task<List<CustomerItemDto>> GetAsync(int? pageNumber)
+        public async Task<ActionResult<List<CustomerItemDto>>> GetAsync(int? pageNumber)
         {
             var request = new GetCustomersQuery
             {
@@ -35,6 +35,34 @@ namespace WebApi.Controllers
                 return NotFound();
             }
             return result;
+        }
+
+        // GET: api/<CustomersController>/search
+        [HttpGet("search")]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<List<CustomerItemDto>>> Search(int? pageNumber,
+            string name, string address, string city, string region, string postalCode, string country)
+        {
+            if (string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(address)
+                && string.IsNullOrWhiteSpace(city) && string.IsNullOrWhiteSpace(region)
+                && string.IsNullOrWhiteSpace(postalCode) && string.IsNullOrWhiteSpace(country)
+                )
+            {
+                return new List<CustomerItemDto>();
+            }
+
+            var request = new GetSearchCustomersQuery
+            {
+                PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,
+                ItemsOnPage = this.ItemsOnPage,
+                CompanyName = name?.Trim(),
+                Address = address?.Trim(),
+                City = city?.Trim(),
+                Region = region?.Trim(),
+                PostalCode = postalCode?.Trim(),
+                Country = country?.Trim()
+            };
+            return await Mediator.Send(request);
         }
 
         // POST api/<CustomersController>

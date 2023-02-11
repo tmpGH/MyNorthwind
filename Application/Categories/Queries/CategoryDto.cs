@@ -1,4 +1,6 @@
-﻿namespace Application.Categories.Queries
+﻿using System;
+
+namespace Application.Categories.Queries
 {
     public class CategoryDto
     {
