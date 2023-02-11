@@ -5,7 +5,6 @@ export abstract class ApiServiceBase {
   constructor(protected http: HttpClient) { }
   
   getListPage<T>(apiUrl: string, pageNumber: number = 1, query?: any) {
-    //TODO: wywoluje sie 2 razy
     let params: HttpParams;
     if(query) {
       params = new HttpParams().appendAll(query);
@@ -18,7 +17,6 @@ export abstract class ApiServiceBase {
   }
 
   getDetails<T>(apiUrl: string, id: number) {
-    //TODO: wywoluje sie 2 razy - 2gi przy wyjsciu
     return this.http.get<T>(apiUrl + '/' + id );
   }
 }
