@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, Event, RouterModule } from '@angular/router';
-import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbNavModule, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { APP_ROUTES, getActiveRouteOrFirst } from './app-routing.module';
 
 @Component({
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   menuItems = APP_ROUTES;
   activeMenuItemId?: string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private offcanvasService: NgbOffcanvas) { }
 
   ngOnInit() {
     this.router.events.subscribe((event: Event) => {
@@ -30,4 +30,7 @@ export class AppComponent implements OnInit {
     });
   }
 
+	open(content: any) {
+		this.offcanvasService.open(content, { ariaLabelledBy: 'offcanvas-basic-title' });
+	}
 }

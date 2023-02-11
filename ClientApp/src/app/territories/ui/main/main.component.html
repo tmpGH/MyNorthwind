@@ -1,24 +1,20 @@
-<div class="d-flex">
+<div class="d-md-flex">
 	<ul ngbNav #nav="ngbNav" [(activeId)]="activeNavItem" class="nav-pills m-1" orientation="vertical">
 		<li ngbNavItem="list" >
 			<a ngbNavLink routerLink="./">Territory list</a>
-			<ng-template ngbNavContent>
-        <router-outlet></router-outlet>
-			</ng-template>
 		</li>
 		<li ngbNavItem="search">
 			<a ngbNavLink routerLink="./search">Territory search</a>
-			<ng-template ngbNavContent>
-        <router-outlet></router-outlet>
-			</ng-template>
 		</li>
 		<li ngbNavItem="details" [disabled]="true">
 			<a ngbNavLink >Territory details</a>
-			<ng-template ngbNavContent>
-        <router-outlet></router-outlet>
-			</ng-template>
 		</li>
 	</ul>
-  <div class="vr"></div>
-	<div [ngbNavOutlet]="nav" class="m-3 mt-1 col-md"></div>
+
+	<div class="vr d-none d-md-block"></div>
+	<hr class="d-block d-md-none"/>
+
+	<div class="m-3 mt-1 col-md">
+		<router-outlet></router-outlet>
+	</div>
 </div>

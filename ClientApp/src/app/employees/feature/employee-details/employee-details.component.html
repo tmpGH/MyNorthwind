@@ -1,5 +1,5 @@
 <div *ngIf="data$ | async as data; else loading">
-  <h2>{{data?.lastName}} {{data?.firstName}} {{data?.title}}</h2>
+  <h3>{{data?.lastName}} {{data?.firstName}} {{data?.title}}</h3>
 
   <p>{{data?.titleOfCourtesy}}</p>
   <p>{{data?.birthDate}}</p>
