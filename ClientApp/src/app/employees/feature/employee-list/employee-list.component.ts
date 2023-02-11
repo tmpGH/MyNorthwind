@@ -37,13 +37,6 @@ export class EmployeeListComponent extends ListComponentBase<EmployeeListItem> i
       action: () => this.showItem('employees'),
       disabled: false,
       isSeparator: false
-    }, {
-      disabled: false,
-      isSeparator: true
-    }, {
-      text: 'Another action',
-      disabled: true,
-      isSeparator: false
     }];
   }  
 }

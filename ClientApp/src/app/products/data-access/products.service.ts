@@ -30,9 +30,8 @@ export class ProductsService extends ApiServiceBase {
     });
   }
 
-  getProductSearch(pageNumber: number = 1) {
-    //TODO: query params
-    this.getListPage<ProductListItem>(this.apiUrl + '/search', pageNumber)
+  getProductSearch(pageNumber: number = 1, query: any) {
+    this.getListPage<ProductListItem>(this.apiUrl + '/search', pageNumber, query)
     .subscribe({
       next: x => {
         let newState = { ...this._state$.getValue(), ProductSearchList: x };

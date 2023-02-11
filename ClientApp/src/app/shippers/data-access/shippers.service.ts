@@ -30,9 +30,8 @@ export class ShippersService extends ApiServiceBase {
     });
   }
  
-  getShipperSearch(pageNumber: number = 1) {
-    //TODO: query params
-    this.getListPage<ShipperListItem>(this.apiUrl + '/search', pageNumber)
+  getShipperSearch(pageNumber: number = 1, query: any) {
+    this.getListPage<ShipperListItem>(this.apiUrl + '/search', pageNumber, query)
     .subscribe({
       next: x => {
         let newState = { ...this._state$.getValue(), ShipperSearchList: x };

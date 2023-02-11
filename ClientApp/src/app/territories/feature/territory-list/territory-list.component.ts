@@ -37,13 +37,6 @@ export class TerritoryListComponent extends ListComponentBase<TerritoryListItem>
       action: () => this.showItem('territories'),
       disabled: false,
       isSeparator: false
-    }, {
-      disabled: false,
-      isSeparator: true
-    }, {
-      text: 'Another action',
-      disabled: false,
-      isSeparator: false
     }];
   }  
 }

@@ -37,13 +37,6 @@ export class ShipperListComponent extends ListComponentBase<ShipperListItem> imp
       action: () => this.showItem('shippers'),
       disabled: false,
       isSeparator: false
-    }, {
-      disabled: false,
-      isSeparator: true
-    }, {
-      text: 'Another action',
-      disabled: false,
-      isSeparator: false
     }];
   }  
 }

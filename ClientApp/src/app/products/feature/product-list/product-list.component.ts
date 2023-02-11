@@ -37,13 +37,6 @@ export class ProductListComponent extends ListComponentBase<ProductListItem>  im
       action: () => this.showItem('products'),
       disabled: false,
       isSeparator: false
-    }, {
-      disabled: false,
-      isSeparator: true
-    }, {
-      text: 'Another action',
-      disabled: false,
-      isSeparator: false
     }];
   }  
 }

@@ -37,13 +37,6 @@ export class OrderListComponent extends ListComponentBase<OrderListItem> impleme
       action: () => this.showItem('orders'),
       disabled: false,
       isSeparator: false
-    }, {
-      disabled: false,
-      isSeparator: true
-    }, {
-      text: 'Another action',
-      disabled: true,
-      isSeparator: false
     }];
   }  
 }

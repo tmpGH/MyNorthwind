@@ -30,9 +30,8 @@ export class RegionsService extends ApiServiceBase {
     });
   }
 
-  getRegionSearch(pageNumber: number = 1) {
-    //TODO: query params
-    this.getListPage<RegionListItem>(this.apiUrl + '/search', pageNumber)
+  getRegionSearch(pageNumber: number = 1, query: any) {
+    this.getListPage<RegionListItem>(this.apiUrl + '/search', pageNumber, query)
     .subscribe({
       next: x => {
         let newState = { ...this._state$.getValue(), RegionSearchList: x };

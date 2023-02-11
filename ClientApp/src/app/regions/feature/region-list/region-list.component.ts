@@ -37,13 +37,6 @@ export class RegionListComponent extends ListComponentBase<RegionListItem> imple
       action: () => this.showItem('regions'),
       disabled: false,
       isSeparator: false
-    }, {
-      disabled: false,
-      isSeparator: true
-    }, {
-      text: 'Another action',
-      disabled: false,
-      isSeparator: false
     }];
   }  
 }

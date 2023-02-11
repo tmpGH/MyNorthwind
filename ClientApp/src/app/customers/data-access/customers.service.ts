@@ -30,9 +30,8 @@ export class CustomersService extends ApiServiceBase {
     });
   }
 
-  getCategorySearch(pageNumber: number = 1) {
-    //TODO: query params
-    this.getListPage<CustomerListItem>(this.apiUrl + '/search', pageNumber)
+  getCustomerSearch(pageNumber: number = 1, query: any) {
+    this.getListPage<CustomerListItem>(this.apiUrl + '/search', pageNumber, query)
     .subscribe({
       next: x => {
         let newState = { ...this._state$.getValue(), CustomerSearchList: x };

@@ -30,9 +30,8 @@ export class EmployeesService extends ApiServiceBase {
     });
   }
 
-  getEmployeeSearch(pageNumber: number = 1) {
-    //TODO: query params
-    this.getListPage<EmployeeListItem>(this.apiUrl + '/search', pageNumber)
+  getEmployeeSearch(pageNumber: number = 1, query: any) {
+    this.getListPage<EmployeeListItem>(this.apiUrl + '/search', pageNumber, query)
     .subscribe({
       next: x => {
         let newState = { ...this._state$.getValue(), EmployeeSearchList: x };

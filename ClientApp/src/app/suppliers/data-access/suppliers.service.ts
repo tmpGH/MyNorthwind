@@ -30,9 +30,8 @@ export class SuppliersService extends ApiServiceBase {
     });
   }
 
-  getSupplierSearch(pageNumber: number = 1) {
-    //TODO: query params
-    this.getListPage<SupplierListItem>(this.apiUrl + '/search', pageNumber)
+  getSupplierSearch(pageNumber: number = 1, query: any) {
+    this.getListPage<SupplierListItem>(this.apiUrl + '/search', pageNumber, query)
     .subscribe({
       next: x => {
         let newState = { ...this._state$.getValue(), SupplierSearchList: x };

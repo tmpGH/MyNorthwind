@@ -30,9 +30,8 @@ export class OrdersService extends ApiServiceBase {
     });
   }
 
-  getOrderSearch(pageNumber: number = 1) {
-    //TODO: query params
-    this.getListPage<OrderListItem>(this.apiUrl + '/search', pageNumber)
+  getOrderSearch(pageNumber: number = 1, query: any) {
+    this.getListPage<OrderListItem>(this.apiUrl + '/search', pageNumber, query)
     .subscribe({
       next: x => {
         let newState = { ...this._state$.getValue(), OrderSearchList: x };

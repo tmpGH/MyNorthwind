@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ApiServiceBase } from '../../shared/data-access/api-service-base';
 import { CategoriesState, CategoryDetails, CategoryListItem } from './categories-state';
@@ -30,16 +30,15 @@ export class CategoriesService extends ApiServiceBase {
     });
   }
 
-  getCategorySearch(pageNumber: number = 1) {
-    //TODO: query params
-    // this.getListPage<CategoryListItem>(this.apiUrl + '/search', pageNumber)
-    // .subscribe({
-    //   next: x => {
-    //     let newState = { ...this._state$.getValue(), CategorySearchList: x };
-    //     this._state$.next(newState);
-    //   }, 
-    //   error: err => console.log(err)
-    // });
+  getCategorySearch(pageNumber: number = 1, query: any) {
+    this.getListPage<CategoryListItem>(this.apiUrl + '/search', pageNumber, query)
+    .subscribe({
+      next: x => {
+        let newState = { ...this._state$.getValue(), CategorySearchList: x };
+        this._state$.next(newState);
+      }, 
+      error: err => console.log(err)
+    });
   }
 
   getCategory(id: number) {

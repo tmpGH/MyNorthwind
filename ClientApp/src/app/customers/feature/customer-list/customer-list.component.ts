@@ -37,14 +37,6 @@ export class CustomerListComponent extends ListComponentBase<CustomerListItem> i
       action: () => this.showItem('customers'),
       disabled: false,
       isSeparator: false
-  
-    }, {
-      disabled: false,
-      isSeparator: true
-    }, {
-      text: 'Another action',
-      disabled: true,
-      isSeparator: false
     }];
   }  
 }

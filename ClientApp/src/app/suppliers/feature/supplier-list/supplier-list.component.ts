@@ -37,13 +37,6 @@ export class SupplierListComponent extends ListComponentBase<SupplierListItem> i
       action: () => this.showItem('suppliers'),
       disabled: false,
       isSeparator: false
-    }, {
-      disabled: false,
-      isSeparator: true
-    }, {
-      text: 'Another action',
-      disabled: false,
-      isSeparator: false
     }];
   }
 }

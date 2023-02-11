@@ -30,9 +30,8 @@ export class TerritoriesService extends ApiServiceBase {
     });
   }
 
-  getTerritorySearch(pageNumber: number = 1) {
-    //TODO: query params
-    this.getListPage<TerritoryListItem>(this.apiUrl + '/search', pageNumber)
+  getTerritorySearch(pageNumber: number = 1, query: any) {
+    this.getListPage<TerritoryListItem>(this.apiUrl + '/search', pageNumber, query)
     .subscribe({
       next: x => {
         let newState = { ...this._state$.getValue(), TerritorySearchList: x };
