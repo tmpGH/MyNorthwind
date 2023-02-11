@@ -1,1 +1,22 @@
+<form>
+	<div class="row">
+		<div class="form-group col">
+			<label for="ordered">Ordered</label>
+			<input id="ordered" class="form-control" [value]="ordered" (input)="ordered=getValue($event)">
+		</div>
+		<div class="form-group col">
+			<label for="required">Required</label>
+			<input id="required" class="form-control" [value]="required" (input)="required=getValue($event)">
+		</div>
+		<div class="form-group col">
+			<label for="shipped">Shipped</label>
+			<input id="shipped" class="form-control" [value]="shipped" (input)="shipped=getValue($event)">
+		</div>
+  </div>
+	<p></p>
+  <button type="button" class="btn btn-secondary" (click)="0">Search</button>
+</form>
+
+<hr/>
+
 <p>order-search under construction!</p>

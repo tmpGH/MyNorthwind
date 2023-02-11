@@ -13,8 +13,8 @@ import { CategoriesService } from '../../data-access/categories.service';
 })
 export class CategorySearchComponent extends ListComponentBase<CategoryListItem> implements OnInit {
 
-  nameTextSearch: string = '';
-  descriptionTextSearch: string = '';
+  categoryName: string = '';
+  description: string = '';
 
   contextMenuItems: ContextMenuItem[] = [];
   
@@ -27,11 +27,10 @@ export class CategorySearchComponent extends ListComponentBase<CategoryListItem>
 
   ngOnInit(): void {
     this.setContextMenu();
-    this.refreshList();
   }
   
   refreshList() {
-    this.dataService.getCategorySearch();
+    this.dataService.getCategorySearch(this.pageNumber, { name: this.categoryName, description: this.description });
   }
 
   getValue(event: Event): string {
@@ -43,13 +42,6 @@ export class CategorySearchComponent extends ListComponentBase<CategoryListItem>
       text: 'Show category details',
       action: () => this.showItem('categories'),
       disabled: false,
-      isSeparator: false
-    }, {
-      disabled: false,
-      isSeparator: true
-    }, {
-      text: 'Another action',
-      disabled: true,
       isSeparator: false
     }];
   }  

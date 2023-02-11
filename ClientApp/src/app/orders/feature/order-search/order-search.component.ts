@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderSearchComponent implements OnInit {
 
+  ordered: string = '';
+  required: string = '';
+  shipped: string = '';
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  getValue(event: Event): string {
+    return (event.target as HTMLInputElement).value;
+  }
 }

@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeSearchComponent implements OnInit {
 
+  lastName: string = '';
+  firstName: string = '';
+  title: string = '';
+  address: string = '';
+  city: string = '';
+  region: string = '';
+  postalCode: string = '';
+  country: string = '';
+  
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  getValue(event: Event): string {
+    return (event.target as HTMLInputElement).value;
+  }
 }

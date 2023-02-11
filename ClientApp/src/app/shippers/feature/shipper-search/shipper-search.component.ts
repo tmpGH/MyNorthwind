@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShipperSearchComponent implements OnInit {
 
+  name: string = '';
+  phone: string = '';
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  getValue(event: Event): string {
+    return (event.target as HTMLInputElement).value;
+  }
 }

@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TerritorySearchComponent implements OnInit {
 
+  description: string = '';
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  getValue(event: Event): string {
+    return (event.target as HTMLInputElement).value;
+  }  
 }

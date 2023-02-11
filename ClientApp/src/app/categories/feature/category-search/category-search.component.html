@@ -1,12 +1,21 @@
-<p>category-search under construction!</p>
+<form>
+	<div class="row">
+		<div class="form-group col">
+			<label for="category-name">Category name</label>
+			<input id="category-name" class="form-control"
+				[value]="categoryName" (input)="categoryName=getValue($event)">
+		</div>
+		<div class="form-group col">
+			<label for="description">Category description</label>
+			<input id="description" class="form-control"
+				[value]="description" (input)="description=getValue($event)">
+		</div>
+	</div>
+	<p></p>
+	<button type="button" class="btn btn-secondary" (click)="refreshList()">Search</button>
+</form>
 
-<p>
-  <label for="searchName">Category name</label>
-  <input id="searchName" [value]="nameTextSearch" (input)="nameTextSearch=getValue($event)">
-  <label for="searchDescription">Category desvcription</label>
-  <input id="searchDescription" [value]="descriptionTextSearch" (input)="descriptionTextSearch=getValue($event)">
-  <button>Search</button>
-</p>
+<hr>
 
 <table class="table table-striped">
 	<thead>

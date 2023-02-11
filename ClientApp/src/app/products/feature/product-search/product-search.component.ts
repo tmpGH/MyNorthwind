@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductSearchComponent implements OnInit {
 
+  name: string = '';
+  unitPrice: string = '';
+  
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  getValue(event: Event): string {
+    return (event.target as HTMLInputElement).value;
+  }
 }
