@@ -17,7 +17,7 @@ export class ProductSearchComponent extends ListComponentBase<ProductListItem> i
 
   searchForm = new FormGroup({
     name: new FormControl(''),
-    unitPrice: new FormControl<Number | undefined>(undefined)
+    unitPrice: new FormControl<Number>(Number.NaN)
   }, { validators: atLeastOneRequiredValidator });
 
   contextMenuItems: ContextMenuItem[] = [];
@@ -34,7 +34,7 @@ export class ProductSearchComponent extends ListComponentBase<ProductListItem> i
   }
   
   refreshList() {
-    let query = this.searchForm.value.unitPrice
+    let query = !Number.isNaN(this.searchForm.value.unitPrice)
       ? {
         name: this.searchForm.value.name,
         unitPrice: this.searchForm.value.unitPrice

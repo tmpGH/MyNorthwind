@@ -43,6 +43,15 @@ namespace WebApi.Controllers
         public async Task<ActionResult<List<EmployeeItemDto>>> Search(int? pageNumber,
             string lastName, string firstName, string title, string address, string city, string region, string postalCode, string country)
         {
+            if (string.IsNullOrWhiteSpace(lastName) && string.IsNullOrWhiteSpace(firstName)
+                && string.IsNullOrWhiteSpace(title) && string.IsNullOrWhiteSpace(address)
+                && string.IsNullOrWhiteSpace(city) && string.IsNullOrWhiteSpace(region)
+                && string.IsNullOrWhiteSpace(postalCode) && string.IsNullOrWhiteSpace(country)
+                )
+            {
+                return new List<EmployeeItemDto>();
+            }
+
             var request = new GetSearchEmployeesQuery
             {
                 PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,

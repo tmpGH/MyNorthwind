@@ -43,6 +43,11 @@ namespace WebApi.Controllers
         public async Task<ActionResult<List<ProductItemDto>>> Search(int? pageNumber,
             string name, decimal? unitPrice)
         {
+            if (string.IsNullOrWhiteSpace(name) && (!unitPrice.HasValue || unitPrice == null))
+            {
+                return new List<ProductItemDto>();
+            }
+
             var request = new GetSearchProductsQuery
             {
                 PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,

@@ -43,6 +43,11 @@ namespace WebApi.Controllers
         public async Task<ActionResult<List<TerritoryItemDto>>> Search(int? pageNumber,
             string description)
         {
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                return new List<TerritoryItemDto>();
+            }
+
             var request = new GetSearchTerritoriesQuery
             {
                 PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,

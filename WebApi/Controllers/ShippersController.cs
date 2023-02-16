@@ -43,6 +43,11 @@ namespace WebApi.Controllers
         public async Task<ActionResult<List<ShipperItemDto>>> Search(int? pageNumber,
             string name, string phone)
         {
+            if (string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(phone))
+            {
+                return new List<ShipperItemDto>();
+            }
+
             var request = new GetSearchShippersQuery
             {
                 PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,

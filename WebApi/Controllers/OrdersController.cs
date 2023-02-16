@@ -44,6 +44,11 @@ namespace WebApi.Controllers
         public async Task<ActionResult<List<OrderItemDto>>> Search(int? pageNumber,
             DateTime? ordered, DateTime? required, DateTime? shipped)
         {
+            if (!ordered.HasValue && !required.HasValue && !shipped.HasValue)
+            {
+                return new List<OrderItemDto>();
+            }
+
             var request = new GetSearchOrdersQuery
             {
                 PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,

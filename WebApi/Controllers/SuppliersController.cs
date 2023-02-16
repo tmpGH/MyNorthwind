@@ -43,6 +43,14 @@ namespace WebApi.Controllers
         public async Task<ActionResult<List<SupplierItemDto>>> Search(int? pageNumber,
             string name, string address, string city, string region, string postalCode, string country)
         {
+            if (string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(address)
+                && string.IsNullOrWhiteSpace(city) && string.IsNullOrWhiteSpace(region)
+                && string.IsNullOrWhiteSpace(postalCode) && string.IsNullOrWhiteSpace(country)
+                )
+            {
+                return new List<SupplierItemDto>();
+            }
+
             var request = new GetSearchSuppliersQuery
             {
                 PageNumber = pageNumber.HasValue && pageNumber > 0 ? pageNumber.Value : 1,
