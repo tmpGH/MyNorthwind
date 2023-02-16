@@ -1,4 +1,3 @@
-import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,9 +17,9 @@ import { OrdersService } from '../../data-access/orders.service';
 export class OrderSearchComponent extends ListComponentBase<OrderListItem> implements OnInit {
 
   searchForm = new FormGroup({
-    ordered: new FormControl<Date>(new Date()),
-    required: new FormControl<Date>(new Date()),
-    shipped: new FormControl<Date>(new Date())
+    ordered: new FormControl<Date | null>(null),
+    required: new FormControl<Date | null>(null),
+    shipped: new FormControl<Date | null>(null)
   }, { validators: atLeastOneRequiredValidator });
 
   contextMenuItems: ContextMenuItem[] = [];
@@ -43,8 +42,13 @@ export class OrderSearchComponent extends ListComponentBase<OrderListItem> imple
       shipped: this.searchForm.value.shipped ? this.searchForm.value.shipped.toJSON() : ''
     });
   }
+  
+  setValue(event: Event, dataType: string) {
+    let val  = new Date((event.target as HTMLInputElement).value);
+    let date = new NgbDate(val.getFullYear(), val.getMonth()+1, val.getDate());
+    this.onDateSelection(date, dataType)
+  }
 
-  // TODO: forme dates
   onDateSelection(date: NgbDate, dataType: string) {
     switch(dataType) {
       case 'ordered':

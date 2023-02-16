@@ -45,15 +45,15 @@ namespace Application.Orders.Queries
             var result = dbSet;
             if (conditions.OrderDate.HasValue)
             {
-                result = result.Where(c => c.OrderDate >= conditions.OrderDate && c.OrderDate >= conditions.OrderDate.Value.AddDays(1));
+                result = result.Where(c => c.OrderDate >= conditions.OrderDate && c.OrderDate < conditions.OrderDate.Value.AddDays(1));
             }
             if (conditions.RequiredDate.HasValue)
             {
-                result = result.Where(c => c.RequiredDate >= conditions.RequiredDate && c.RequiredDate >= conditions.RequiredDate.Value.AddDays(1));
+                result = result.Where(c => c.RequiredDate >= conditions.RequiredDate && c.RequiredDate < conditions.RequiredDate.Value.AddDays(1));
             }
             if (conditions.ShippedDate.HasValue)
             {
-                result = result.Where(c => c.ShippedDate >= conditions.ShippedDate && c.ShippedDate >= conditions.ShippedDate.Value.AddDays(1));
+                result = result.Where(c => c.ShippedDate >= conditions.ShippedDate && c.ShippedDate < conditions.ShippedDate.Value.AddDays(1));
             }
 
             result = result.OrderBy(e => e.OrderDate)

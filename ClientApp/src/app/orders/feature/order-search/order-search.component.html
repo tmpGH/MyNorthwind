@@ -7,6 +7,7 @@
 			<div class="input-group">
 				<input id="ordered" class="form-control" placeholder="yyyy-mm-dd"
 				ngbDatepicker #orderedD="ngbDatepicker"
+				(input)="setValue($event, 'ordered')"
 				(dateSelect)="onDateSelection($event, 'ordered')"
 				formControlName="ordered">
 				<button class="btn btn-outline-secondary bi bi-calendar3" (click)="orderedD.toggle()" type="button"></button>
@@ -17,6 +18,7 @@
 			<div class="input-group">
 				<input id="required" class="form-control" placeholder="yyyy-mm-dd"
 				ngbDatepicker #requiredD="ngbDatepicker"
+				(input)="setValue($event, 'required')"
 				(dateSelect)="onDateSelection($event, 'required')"
 				formControlName="required">
 				<button class="btn btn-outline-secondary bi bi-calendar3" (click)="requiredD.toggle()" type="button"></button>
@@ -27,6 +29,7 @@
 			<div class="input-group">
 				<input id="shipped" class="form-control" placeholder="yyyy-mm-dd"
 				ngbDatepicker #shippedD="ngbDatepicker"
+				(input)="setValue($event, 'shipped')"
 				(dateSelect)="onDateSelection($event, 'shipped')"
 				formControlName="shipped">
 				<button class="btn btn-outline-secondary bi bi-calendar3" (click)="shippedD.toggle()" type="button"></button>
