@@ -1,9 +1,9 @@
 <div *ngIf="data$ | async as data; else loading">
   <h3>{{data?.orderID}}</h3>
 
-  <p>{{data?.orderDate}}</p>
-  <p>{{data?.requiredDate}}</p>
-  <p>{{data?.shippedDate}}</p>
+  <p>{{data?.orderDate | date : 'y MMM d, H:mm' }}</p>
+  <p>{{data?.requiredDate | date : 'y MMM d, H:mm' }}</p>
+  <p>{{data?.shippedDate | date : 'y MMM d, H:mm' }}</p>
   <p>{{data?.freight}}</p>
   <p>{{data?.shipName}}</p>
   <p>{{data?.shipAddress}}</p>
