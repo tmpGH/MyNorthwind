@@ -9,6 +9,7 @@ import { TerritoriesService } from '../../data-access/territories.service';
 import { TerritoryListComponent } from '../territory-list/territory-list.component';
 import { TerritoriesRoutingModule } from './territories-routing.module';
 import { TerritorySearchComponent } from '../territory-search/territory-search.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { TerritorySearchComponent } from '../territory-search/territory-search.c
     NgbTypeaheadModule,
     NgbPaginationModule,
     NgbNavModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   providers: [TerritoriesService],
   exports: [RouterModule]

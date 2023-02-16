@@ -9,6 +9,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { EmployeesService } from '../../data-access/employees.service';
 import { EmployeesRoutingModule } from './employees-routing.module';
 import { EmployeeSearchComponent } from '../employee-search/employee-search.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { EmployeeSearchComponent } from '../employee-search/employee-search.comp
     NgbTypeaheadModule,
     NgbPaginationModule,
     NgbNavModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   providers: [EmployeesService],
   exports: [RouterModule]

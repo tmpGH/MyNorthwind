@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map } from 'rxjs';
 import { ListComponentBase } from 'src/app/shared/ui/list-component-base/list-component-base';
@@ -13,7 +14,7 @@ import { TerritoriesService } from '../../data-access/territories.service';
 })
 export class TerritorySearchComponent extends ListComponentBase<TerritoryListItem> implements OnInit {
 
-  description: string = '';
+  description = new FormControl('', Validators.required);
   
   contextMenuItems: ContextMenuItem[] = [];
 
@@ -28,12 +29,10 @@ export class TerritorySearchComponent extends ListComponentBase<TerritoryListIte
   }
 
   refreshList() {
-    this.dataService.getTerritorySearch(this.pageNumber, { description: this.description });
+    this.dataService.getTerritorySearch(this.pageNumber, {
+      description: this.description.value
+    });
   }  
-
-  getValue(event: Event): string {
-    return (event.target as HTMLInputElement).value;
-  }
 
   setContextMenu() {
     this.contextMenuItems = [{

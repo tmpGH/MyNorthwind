@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map } from 'rxjs';
 import { ListComponentBase } from 'src/app/shared/ui/list-component-base/list-component-base';
 import { ContextMenuItem } from 'src/app/shared/ui/list-context-menu/context-menu-item';
+import { atLeastOneRequiredValidator } from 'src/app/shared/validators/atLeastOneRequiredValidator';
 import { ProductListItem } from '../../data-access/products-state';
 import { ProductsService } from '../../data-access/products.service';
 
@@ -13,9 +15,11 @@ import { ProductsService } from '../../data-access/products.service';
 })
 export class ProductSearchComponent extends ListComponentBase<ProductListItem> implements OnInit {
 
-  name: string = '';
-  unitPrice: string = '';
-  
+  searchForm = new FormGroup({
+    name: new FormControl(''),
+    unitPrice: new FormControl<Number | undefined>(undefined)
+  }, { validators: atLeastOneRequiredValidator });
+
   contextMenuItems: ContextMenuItem[] = [];
   
   constructor(private dataService: ProductsService, protected override router: Router) {
@@ -30,11 +34,14 @@ export class ProductSearchComponent extends ListComponentBase<ProductListItem> i
   }
   
   refreshList() {
-    this.dataService.getProductSearch(this.pageNumber, { name: this.name, unitPrice: this.unitPrice });
-  }
+    let query = this.searchForm.value.unitPrice
+      ? {
+        name: this.searchForm.value.name,
+        unitPrice: this.searchForm.value.unitPrice
+      }
+      : { name: this.searchForm.value.name };
 
-  getValue(event: Event): string {
-    return (event.target as HTMLInputElement).value;
+    this.dataService.getProductSearch(this.pageNumber, query);
   }
 
   setContextMenu() {

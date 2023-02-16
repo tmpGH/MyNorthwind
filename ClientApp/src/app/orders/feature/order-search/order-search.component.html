@@ -1,13 +1,14 @@
 <p><b>UNDER CONSTRUCTION</b></p>
 
-<form>
+<form [formGroup]="searchForm">
 	<div class="row">
 		<div class="form-group col">
 			<label for="ordered">Ordered</label>
 			<div class="input-group">
 				<input id="ordered" class="form-control" placeholder="yyyy-mm-dd"
 				ngbDatepicker #orderedD="ngbDatepicker"
-				(dateSelect)="onDateSelection($event, 'ordered')">
+				(dateSelect)="onDateSelection($event, 'ordered')"
+				formControlName="ordered">
 				<button class="btn btn-outline-secondary bi bi-calendar3" (click)="orderedD.toggle()" type="button"></button>
 			</div>
 		</div>
@@ -16,7 +17,8 @@
 			<div class="input-group">
 				<input id="required" class="form-control" placeholder="yyyy-mm-dd"
 				ngbDatepicker #requiredD="ngbDatepicker"
-				(dateSelect)="onDateSelection($event, 'required')">
+				(dateSelect)="onDateSelection($event, 'required')"
+				formControlName="required">
 				<button class="btn btn-outline-secondary bi bi-calendar3" (click)="requiredD.toggle()" type="button"></button>
 			</div>
 		</div>
@@ -25,14 +27,17 @@
 			<div class="input-group">
 				<input id="shipped" class="form-control" placeholder="yyyy-mm-dd"
 				ngbDatepicker #shippedD="ngbDatepicker"
-				(dateSelect)="onDateSelection($event, 'shipped')">
+				(dateSelect)="onDateSelection($event, 'shipped')"
+				formControlName="shipped">
 				<button class="btn btn-outline-secondary bi bi-calendar3" (click)="shippedD.toggle()" type="button"></button>
 			</div>
 		</div>
 		<div class="form-group col"></div>
   </div>
 	<p></p>
-  <button type="button" class="btn btn-secondary" (click)="refreshList()">Search</button>
+  <button type="button" class="btn btn-secondary" (click)="refreshList()" [disabled]="!searchForm.valid">
+		Search
+	</button>
 </form>
 
 <hr/>

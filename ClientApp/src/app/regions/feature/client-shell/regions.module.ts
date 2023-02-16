@@ -9,6 +9,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { RegionsService } from '../../data-access/regions.service';
 import { RegionsRoutingModule } from './regions-routing.module';
 import { RegionSearchComponent } from '../region-search/region-search.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RegionSearchComponent } from '../region-search/region-search.component'
     NgbTypeaheadModule,
     NgbPaginationModule,
     NgbNavModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   providers: [RegionsService],
   exports: [RouterModule]

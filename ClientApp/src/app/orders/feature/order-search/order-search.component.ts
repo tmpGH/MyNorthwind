@@ -1,9 +1,12 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs';
 import { ListComponentBase } from 'src/app/shared/ui/list-component-base/list-component-base';
 import { ContextMenuItem } from 'src/app/shared/ui/list-context-menu/context-menu-item';
+import { atLeastOneRequiredValidator } from 'src/app/shared/validators/atLeastOneRequiredValidator';
 import { OrderListItem } from '../../data-access/orders-state';
 import { OrdersService } from '../../data-access/orders.service';
 
@@ -14,9 +17,11 @@ import { OrdersService } from '../../data-access/orders.service';
 })
 export class OrderSearchComponent extends ListComponentBase<OrderListItem> implements OnInit {
 
-  ordered: Date;
-  required: Date;
-  shipped: Date;
+  searchForm = new FormGroup({
+    ordered: new FormControl<Date>(new Date()),
+    required: new FormControl<Date>(new Date()),
+    shipped: new FormControl<Date>(new Date())
+  }, { validators: atLeastOneRequiredValidator });
 
   contextMenuItems: ContextMenuItem[] = [];
   
@@ -33,24 +38,25 @@ export class OrderSearchComponent extends ListComponentBase<OrderListItem> imple
   
   refreshList() {
     this.dataService.getOrderSearch(this.pageNumber, {
-      ordered: this.ordered ? this.ordered.toJSON() : '',
-      required: this.required ? this.required.toJSON() : '',
-      shipped: this.shipped ? this.shipped.toJSON() : ''
+      ordered: this.searchForm.value.ordered ? this.searchForm.value.ordered.toJSON() : '',
+      required: this.searchForm.value.required ? this.searchForm.value.required.toJSON() : '',
+      shipped: this.searchForm.value.shipped ? this.searchForm.value.shipped.toJSON() : ''
     });
   }
 
-	onDateSelection(date: NgbDate, dataType: string) {
+  // TODO: forme dates
+  onDateSelection(date: NgbDate, dataType: string) {
     switch(dataType) {
       case 'ordered':
-        this.ordered = new Date(date.year, date.month-1, date.day);
+        this.searchForm.value.ordered = new Date(date.year, date.month-1, date.day);
         break;
-        case 'required':
-          this.required = new Date(date.year, date.month-1, date.day);
-          break;
-        case 'shipped':
-          this.shipped = new Date(date.year, date.month-1, date.day);
-          break;
-      }
+      case 'required':
+        this.searchForm.value.required = new Date(date.year, date.month-1, date.day);
+        break;
+      case 'shipped':
+        this.searchForm.value.shipped = new Date(date.year, date.month-1, date.day);
+        break;
+    }
 	}
     
   setContextMenu() {

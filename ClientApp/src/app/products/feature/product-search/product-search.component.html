@@ -1,18 +1,20 @@
-<form>
+<form [formGroup]="searchForm">
 	<div class="row">
 		<div class="form-group col">
 			<label for="name">Name</label>
-			<input id="name" class="form-control" [value]="name" (input)="name=getValue($event)">
+			<input id="name" class="form-control" formControlName="name">
 		</div>
 		<div class="form-group col">
 			<label for="unit-price">Unit price</label>
-			<input id="unit-price" class="form-control" [value]="unitPrice" (input)="unitPrice=getValue($event)">
+			<input id="unit-price" type="number" class="form-control" formControlName="unitPrice">
 		</div>
 		<div class="form-group col"></div>
 		<div class="form-group col"></div>
   </div>
 	<p></p>
-  <button type="button" class="btn btn-secondary" (click)="refreshList()">Search</button>
+  <button type="button" class="btn btn-secondary" (click)="refreshList()"  [disabled]="!searchForm.valid">
+		Search
+	</button>
 </form>
 
 <hr/>

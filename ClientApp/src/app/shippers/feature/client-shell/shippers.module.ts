@@ -9,6 +9,7 @@ import { ShippersService } from '../../data-access/shippers.service';
 import { ShipperListComponent } from '../shipper-list/shipper-list.component';
 import { ShippersRoutingModule } from './shippers-routing.module';
 import { ShipperSearchComponent } from '../shipper-search/shipper-search.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ShipperSearchComponent } from '../shipper-search/shipper-search.compone
     NgbTypeaheadModule,
     NgbPaginationModule,
     NgbNavModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   providers: [ShippersService],
   exports: [RouterModule]

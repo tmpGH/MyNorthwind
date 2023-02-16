@@ -9,6 +9,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { CustomersService } from '../../data-access/customers.service';
 import { CustomersRoutingModule } from './customers-routing.module';
 import { CustomerSearchComponent } from '../customer-search/customer-search.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CustomerSearchComponent } from '../customer-search/customer-search.comp
     NgbTypeaheadModule,
     NgbPaginationModule,
     NgbNavModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   providers: [CustomersService],
   exports: [RouterModule]

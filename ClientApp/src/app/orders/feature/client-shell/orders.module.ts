@@ -9,6 +9,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { OrdersService } from '../../data-access/orders.service';
 import { OrdersRoutingModule } from './orders-routing.module';
 import { OrderSearchComponent } from '../order-search/order-search.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { OrderSearchComponent } from '../order-search/order-search.component';
     NgbPaginationModule,
     NgbNavModule,
     NgbDatepickerModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   providers: [OrdersService],
   exports: [RouterModule]

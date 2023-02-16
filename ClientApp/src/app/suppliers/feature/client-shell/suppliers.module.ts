@@ -9,6 +9,7 @@ import { SuppliersService } from '../../data-access/suppliers.service';
 import { SupplierListComponent } from '../supplier-list/supplier-list.component';
 import { SuppliersRoutingModule } from './suppliers-routing.module';
 import { SupplierSearchComponent } from '../supplier-search/supplier-search.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SupplierSearchComponent } from '../supplier-search/supplier-search.comp
     NgbTypeaheadModule,
     NgbPaginationModule,
     NgbNavModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   providers: [SuppliersService],
   exports: [RouterModule]

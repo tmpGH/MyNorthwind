@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map } from 'rxjs';
 import { ListComponentBase } from 'src/app/shared/ui/list-component-base/list-component-base';
 import { ContextMenuItem } from 'src/app/shared/ui/list-context-menu/context-menu-item';
+import { atLeastOneRequiredValidator } from 'src/app/shared/validators/atLeastOneRequiredValidator';
 import { ShipperListItem } from '../../data-access/shippers-state';
 import { ShippersService } from '../../data-access/shippers.service';
 
@@ -13,8 +15,10 @@ import { ShippersService } from '../../data-access/shippers.service';
 })
 export class ShipperSearchComponent extends ListComponentBase<ShipperListItem> implements OnInit {
 
-  name: string = '';
-  phone: string = '';
+  searchForm = new FormGroup({
+    name: new FormControl(''),
+    phone: new FormControl('')
+  }, { validators: atLeastOneRequiredValidator });
 
   contextMenuItems: ContextMenuItem[] = [];
   
@@ -30,11 +34,10 @@ export class ShipperSearchComponent extends ListComponentBase<ShipperListItem> i
   }
 
   refreshList() {
-    this.dataService.getShipperSearch(this.pageNumber, { name: this.name, phone: this.phone });
-  }
-
-  getValue(event: Event): string {
-    return (event.target as HTMLInputElement).value;
+    this.dataService.getShipperSearch(this.pageNumber, {
+      name: this.searchForm.value.name,
+      phone: this.searchForm.value.phone
+    });
   }
 
   setContextMenu() {

@@ -9,6 +9,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { ProductsService } from '../../data-access/products.service';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductSearchComponent } from '../product-search/product-search.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProductSearchComponent } from '../product-search/product-search.compone
     NgbTypeaheadModule,
     NgbPaginationModule,
     NgbNavModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   providers: [ProductsService],
   exports: [RouterModule]

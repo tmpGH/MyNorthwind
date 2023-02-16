@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map } from 'rxjs';
 import { ListComponentBase } from 'src/app/shared/ui/list-component-base/list-component-base';
 import { ContextMenuItem } from 'src/app/shared/ui/list-context-menu/context-menu-item';
+import { atLeastOneRequiredValidator } from 'src/app/shared/validators/atLeastOneRequiredValidator';
 import { EmployeeListItem } from '../../data-access/employees-state';
 import { EmployeesService } from '../../data-access/employees.service';
 
@@ -13,15 +15,17 @@ import { EmployeesService } from '../../data-access/employees.service';
 })
 export class EmployeeSearchComponent extends ListComponentBase<EmployeeListItem> implements OnInit {
 
-  lastName: string = '';
-  firstName: string = '';
-  title: string = '';
-  address: string = '';
-  city: string = '';
-  region: string = '';
-  postalCode: string = '';
-  country: string = '';
-  
+  searchForm = new FormGroup({
+    lastName: new FormControl(''),
+    firstName: new FormControl(''),
+    title: new FormControl(''),
+    address: new FormControl(''),
+    city: new FormControl(''),
+    region: new FormControl(''),
+    postalCode: new FormControl(''),
+    country: new FormControl('')
+  }, { validators: atLeastOneRequiredValidator });
+
   contextMenuItems: ContextMenuItem[] = [];
   
   constructor(private dataService: EmployeesService, protected override router: Router) {
@@ -37,19 +41,15 @@ export class EmployeeSearchComponent extends ListComponentBase<EmployeeListItem>
   
   refreshList() {
     this.dataService.getEmployeeSearch(this.pageNumber, {
-      lastName: this.lastName,
-      firstName: this.firstName,
-      title: this.title,
-      address: this.address,
-      city: this.city,
-      region: this.region,
-      postalCode: this.postalCode,
-      country: this.country
+      lastName: this.searchForm.value.lastName,
+      firstName: this.searchForm.value.firstName,
+      title: this.searchForm.value.title,
+      address: this.searchForm.value.address,
+      city: this.searchForm.value.city,
+      region: this.searchForm.value.region,
+      postalCode: this.searchForm.value.postalCode,
+      country: this.searchForm.value.country
     });
-  }
-
-  getValue(event: Event): string {
-    return (event.target as HTMLInputElement).value;
   }
 
   setContextMenu() {

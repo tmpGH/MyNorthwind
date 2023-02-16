@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map } from 'rxjs';
 import { ListComponentBase } from 'src/app/shared/ui/list-component-base/list-component-base';
@@ -13,7 +14,7 @@ import { RegionsService } from '../../data-access/regions.service';
 })
 export class RegionSearchComponent extends ListComponentBase<RegionListItem> implements OnInit {
 
-  description: string = '';
+  description = new FormControl('', Validators.required);
   
   contextMenuItems: ContextMenuItem[] = [];
   
@@ -29,11 +30,9 @@ export class RegionSearchComponent extends ListComponentBase<RegionListItem> imp
   }
 
   refreshList() {
-    this.dataService.getRegionSearch(this.pageNumber, { description: this.description });
-  }
-
-  getValue(event: Event): string {
-    return (event.target as HTMLInputElement).value;
+    this.dataService.getRegionSearch(this.pageNumber, {
+      description: this.description.value
+    });
   }
 
   setContextMenu() {
