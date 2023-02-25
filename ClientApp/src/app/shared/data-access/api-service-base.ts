@@ -4,7 +4,7 @@ export abstract class ApiServiceBase {
   
   constructor(protected http: HttpClient) { }
   
-  getListPage<T>(apiUrl: string, pageNumber: number = 1, query?: any) {
+  protected getListPage<T>(apiUrl: string, pageNumber: number = 1, query?: any) {
     let params: HttpParams;
     if(query) {
       params = new HttpParams().appendAll(query);
@@ -16,7 +16,7 @@ export abstract class ApiServiceBase {
     return this.http.get<T[]>(apiUrl, { params });
   }
 
-  getDetails<T>(apiUrl: string, id: number) {
+  protected getDetails<T>(apiUrl: string, id: number) {
     return this.http.get<T>(apiUrl + '/' + id );
   }
 }
